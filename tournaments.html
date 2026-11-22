@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esports - Giải Đấu Trực Tiếp</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navbar liên kết các trang -->
+    <header class="header">
+    <!-- Đổi từ thẻ div sang thẻ a trỏ về index.html -->
+    <a href="index.html" class="logo" title="Trang Chủ">
+    <i class="fa-solid fa-gamepad"></i><span>ESPORTS</span>
+    </a>
+<nav class="navbar">
+    <a href="news.html"><i class="fa-solid fa-newspaper"></i> Tin Tức</a>
+    
+    <!-- Dropdown Menu Đội Tuyển -->
+    <div class="dropdown">
+        <a href="roster.html" class="dropdown-toggle">
+            <i class="fa-solid fa-shield-halved"></i> Đội Tuyển 
+            <i class="fa-solid fa-angle-down" style="font-size: 0.75rem;"></i>
+        </a>
+        <div class="dropdown-menu">
+            <div class="dropdown-column">
+                <h4>Việt Nam</h4>
+                <a href="roster.html?game=lq">Team Liên Quân Mobile</a>
+                <a href="roster.html?game=ff">Team Free Fire</a>
+                <a href="roster.html?game=pubg">Team PUBG Mobile</a>
+                <a href="roster.html?game=fco">Team FC Online</a>
+            </div>
+            <div class="dropdown-column">
+                <h4>Quốc Tế</h4>
+                <a href="roster.html?game=lol">Team League of Legends (LCK)</a>
+                <a href="roster.html?game=valorant">Team Valorant (Global)</a>
+                <a href="roster.html?game=cs2">Team CS2 (Europe)</a>
+            </div>
+        </div>
+    </div>
+
+<a href="store.html" class="store-nav-link">
+    <i class="fa-solid fa-cart-shopping"></i> 
+    <span>Cửa hàng</span>
+</a>
+<div class="dropdown">
+    <a href="wiki.html" class="dropdown-toggle">
+        <i class="fa-solid fa-book-open"></i> Wiki & Thông Số 
+        <i class="fa-solid fa-angle-down" style="font-size: 0.75rem;"></i>
+    </a>
+    <div class="dropdown-menu wiki-dropdown-menu">
+        <div class="dropdown-column">
+            <h4>Tướng & Nhân Vật</h4>
+            <a href="wiki.html?tab=lol-champ">Tướng Liên Minh (LOL)</a>
+            <a href="wiki.html?tab=lq-champ">Tướng Liên Quân Mobile</a>
+            <a href="wiki.html?tab=ff-char">Nhân Vật Free Fire</a>
+        </div>
+        <div class="dropdown-column">
+            <h4>Trang Bị & Vũ Khí</h4>
+            <a href="wiki.html?game=lol&type=equipment">Trang Bị LMHT</a>
+            <a href="wiki.html?game=lq&type=equipment">Trang Bị Liên Quân</a>
+            <a href="wiki.html?game=ff&type=equipment">Vũ Khí Free Fire</a>
+        </div>
+    </div>
+</div>
+    <a href="tournaments.html" class="active"><i class="fa-solid fa-trophy"></i> Giải Đấu</a>
+    <a href="practice.html"><i class="fa-solid fa-dumbbell"></i> Phòng Tập Luyện</a>
+    <a href="downloads.html"><i class="fa-solid fa-download"></i> Tải Game</a>
+</nav>
+<div class="header-right">
+            <!-- 1. Tìm kiếm -->
+            <div class="search-box" id="headerSearchBox">
+                <button type="button" class="search-icon-btn" id="searchToggleBtn" title="Tìm kiếm" aria-label="Tìm kiếm">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <input type="text" id="globalSearch" placeholder="Tìm kiếm...">
+            </div>
+
+            <!-- 2. Giỏ hàng đã thêm (kèm số lượng) -->
+            <button type="button" class="header-action-btn" id="cartToggleBtn" title="Giỏ hàng" aria-label="Giỏ hàng">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+
+            <!-- 3. Chọn Ngôn ngữ -->
+            <div class="lang-dropdown" id="langDropdown">
+                <button type="button" class="header-action-btn" id="langToggleBtn" title="Ngôn ngữ" aria-label="Ngôn ngữ">
+                    <i class="fa-solid fa-globe"></i>
+                </button>
+                <div class="lang-menu" id="langMenu">
+                    <button type="button" class="lang-option active" data-lang="VI">🇻🇳 Tiếng Việt (VN)</button>
+                    <button type="button" class="lang-option" data-lang="EN">🇺🇸 English (EN)</button>
+                </div>
+            </div>
+            <!-- Tài khoản User Dropdown (Phong cách Riot Games) -->
+            <div class="user-menu-wrapper" id="userMenuWrapper">
+                <button type="button" class="header-action-btn account-btn" id="accountToggleBtn" title="Tài khoản" aria-label="Tài khoản">
+                    <i class="fa-solid fa-user" id="headerUserIcon"></i>
+                    <img src="images/faker_league_of_legends_esports.png" alt="Avatar" class="header-user-avatar" id="headerUserAvatar" style="display: none;">
+                </button>
+                <div class="user-profile-dropdown" id="userProfileDropdown">
+                    <div class="up-header">
+                        <img src="images/faker_league_of_legends_esports.png" alt="Avatar" class="up-avatar" id="upAvatarImg">
+                        <div class="up-info">
+                            <span class="up-name" id="upRiotId">Tunguyen#2026</span>
+                            <span class="up-email" id="upEmail">tunguyen@esports.gg</span>
+                        </div>
+                    </div>
+                    <div class="up-wallet-bar">
+                        <div class="up-wallet-left">
+                            <span class="up-wallet-label"><i class="fa-solid fa-wallet" style="color: #10b981;"></i> Số dư ví:</span>
+                            <span class="up-wallet-val" id="upWalletBalance">500.000 đ</span>
+                        </div>
+                        <a href="account.html?tab=wallet" class="up-wallet-btn">
+                            <i class="fa-solid fa-plus-circle"></i> Nạp
+                        </a>
+                    </div>
+                    <div class="up-links">
+                        <a href="account.html?tab=riot-id"><i class="fa-solid fa-id-badge" style="color: #00f0ff;"></i> Thông Tin ID</a>
+                        <a href="account.html?tab=wallet"><i class="fa-solid fa-wallet" style="color: #10b981;"></i> Nạp Tiền & Ví Điện Tử</a>
+                        <a href="account.html?tab=charity"><i class="fa-solid fa-hand-holding-heart" style="color: #ec4899;"></i> Quyên Góp Từ Thiện</a>
+                        <a href="account.html?tab=orders"><i class="fa-solid fa-box-open" style="color: #f59e0b;"></i> Lịch Sử Đơn Hàng</a>
+                        <a href="account.html?tab=security"><i class="fa-solid fa-shield-halved" style="color: #3b82f6;"></i> Bảo Mật & 2FA</a>
+                        <button type="button" class="up-logout-btn" id="upLogoutBtn">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng Xuất
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút 3 gạch khi thu nhỏ màn hình -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <!-- NGĂN KÉO GIỎ HÀNG ĐÃ THÊM (CART DRAWER) -->
+    <div class="side-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <!-- HEADER VỚI TAB CHUYỂN ĐỔI -->
+        <div class="drawer-header cart-drawer-header">
+            <div class="cart-nav-tabs">
+                <button type="button" class="cart-tab-btn active" id="cartTabBtnCart" title="Xem giỏ hàng">
+                    <i class="fa-solid fa-bag-shopping"></i> <span>Giỏ Hàng</span>
+                    <span class="cart-tab-badge" id="cartTabBadgeCount">0</span>
+                </button>
+                <button type="button" class="cart-tab-btn" id="cartTabBtnCheckout" title="Thông tin đặt hàng">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> <span>Đặt Hàng</span>
+                </button>
+            </div>
+            <button type="button" class="drawer-close-btn" id="cartCloseBtn" aria-label="Đóng"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- TAB 1: DANH SÁCH GIỎ HÀNG -->
+        <div class="cart-view-pane active" id="cartPaneItems">
+            <div class="cart-items-list" id="cartItemsList">
+                <p class="empty-cart-msg">Chưa có sản phẩm nào trong giỏ hàng.</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <span>Tổng cộng:</span>
+                    <strong id="cartTotalPrice">0 đ</strong>
+                </div>
+                <button type="button" class="btn btn-primary" id="checkoutBtn" style="width: 100%;">
+                    <span>Thanh Toán Ngay</span> <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB 2: THÔNG TIN ĐẶT HÀNG -->
+        <div class="cart-view-pane" id="cartPaneCheckout">
+            <div class="checkout-scroll-area">
+                <button type="button" class="checkout-back-btn" id="checkoutBackToCartBtn">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Quay lại giỏ hàng</span>
+                </button>
+
+                <form id="orderForm" autocomplete="on" onsubmit="return false;">
+                    <!-- Họ tên & Số điện thoại -->
+                    <div class="checkout-form-group">
+                        <label for="orderRecipientName"><i class="fa-solid fa-user"></i> Họ tên người nhận <span class="req">*</span></label>
+                        <input type="text" id="orderRecipientName" class="checkout-input" placeholder="Ví dụ: Nguyễn Văn A" required>
+                    </div>
+
+                    <div class="checkout-form-group">
+                        <label for="orderPhone"><i class="fa-solid fa-phone"></i> Số điện thoại nhận hàng <span class="req">*</span></label>
+                        <input type="tel" id="orderPhone" class="checkout-input" placeholder="Ví dụ: 0912 345 678" required>
+                    </div>
+
+                    <!-- Địa chỉ nhận hàng -->
+                    <div class="checkout-form-group">
+                        <label for="orderAddress"><i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng <span class="req">*</span></label>
+                        <textarea id="orderAddress" class="checkout-input checkout-textarea" rows="2" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành..." required></textarea>
+                    </div>
+
+                    <!-- Ước tính thời gian nhận hàng -->
+                    <div class="checkout-delivery-card">
+                        <div class="delivery-card-header">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Ước tính thời gian nhận hàng</span>
+                        </div>
+                        <div class="delivery-estimate-badge">
+                            <div class="delivery-estimate-main"><i class="fa-solid fa-bolt" style="color: #00f0ff;"></i> <strong>2 - 3 ngày làm việc</strong></div>
+                            <div class="delivery-estimate-date" id="orderDeliveryDateText">Dự kiến giao: 2 - 3 ngày tới</div>
+                        </div>
+                        <div class="delivery-courier-tag">
+                            <i class="fa-solid fa-truck-fast"></i> Đơn vị vận chuyển: Esports Express (Giao hàng tận nơi)
+                        </div>
+                    </div>
+
+                    <!-- Phương thức thanh toán -->
+                    <div class="checkout-form-group">
+                        <label><i class="fa-solid fa-wallet"></i> Phương thức thanh toán <span class="req">*</span></label>
+                        <div class="payment-methods-grid">
+                            <label class="payment-method-card selected">
+                                <input type="radio" name="orderPaymentMethod" value="COD" checked>
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-hand-holding-dollar"></i> Tiền mặt khi nhận hàng (COD)</div>
+                                    <div class="pm-desc">Kiểm tra hàng trước khi thanh toán</div>
+                                </div>
+                            </label>
+                            <label class="payment-method-card" id="walletPaymentCard">
+                                <input type="radio" name="orderPaymentMethod" value="WALLET">
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-wallet" style="color: #10b981;"></i> Ví Tiền Esports (<span id="checkoutWalletBalanceLabel">500.000 đ</span>)</div>
+                                    <div class="pm-desc" id="checkoutWalletDesc">Trừ trực tiếp số dư tài khoản web</div>
+                                </div>
+                            </label>
+                            <label class="payment-method-card">
+                                <input type="radio" name="orderPaymentMethod" value="BANK">
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-qrcode"></i> Chuyển khoản VietQR / Banking</div>
+                                    <div class="pm-desc">Quét mã QR tự động 24/7</div>
+                                </div>
+                            </label>
+                            <label class="payment-method-card">
+                                <input type="radio" name="orderPaymentMethod" value="EWALLET">
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-mobile-screen-button"></i> Ví MoMo / ZaloPay</div>
+                                    <div class="pm-desc">Thanh toán tức thì bảo mật</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Mã giảm giá -->
+                    <div class="checkout-form-group">
+                        <label for="orderCouponInput"><i class="fa-solid fa-ticket"></i> Mã giảm giá</label>
+                        <div class="coupon-action-box">
+                            <input type="text" id="orderCouponInput" class="checkout-input coupon-input" placeholder="Nhập mã ưu đãi...">
+                            <button type="button" class="btn-coupon-apply" id="applyCouponBtn">Áp dụng</button>
+                        </div>
+                        <div class="coupon-status-msg" id="couponStatusMsg"></div>
+                        <div class="coupon-chips">
+                            <span>Gợi ý:</span>
+                            <button type="button" class="coupon-chip-btn" data-code="ESPORTS">ESPORTS (-10%)</button>
+                            <button type="button" class="coupon-chip-btn" data-code="FREESHIP">FREESHIP</button>
+                        </div>
+                    </div>
+
+                    <!-- Bảng tóm tắt đơn hàng -->
+                    <div class="checkout-summary-card">
+                        <div class="summary-line">
+                            <span>Tạm tính (<span id="checkoutSummaryQty">0</span> món):</span>
+                            <span id="checkoutSummarySubtotal">0 đ</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Phí vận chuyển:</span>
+                            <span id="checkoutSummaryShipping" class="free-ship">Miễn phí</span>
+                        </div>
+                        <div class="summary-line discount-line" id="checkoutDiscountRow" style="display: none;">
+                            <span>Mã giảm giá (<span id="checkoutCouponTag"></span>):</span>
+                            <span id="checkoutDiscountAmount">-0 đ</span>
+                        </div>
+                        <div class="summary-line total-line">
+                            <span>Tổng thanh toán:</span>
+                            <strong id="checkoutGrandTotal">0 đ</strong>
+                        </div>
+                    </div>
+
+                    <!-- Thông báo lỗi nhập form -->
+                    <div class="checkout-error-banner" id="checkoutFormError" style="display: none;"></div>
+
+                    <!-- Nút xác nhận đặt hàng -->
+                    <button type="button" class="btn btn-primary" id="confirmOrderBtn" style="width: 100%; margin-top: 15px; padding: 12px;">
+                        <i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i> Xác Nhận Đặt Hàng
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- THÔNG BÁO ĐẶT HÀNG THÀNH CÔNG VỚI TỰ ĐỘNG TẮT -->
+        <div class="order-success-modal" id="orderSuccessModal">
+            <div class="order-success-content">
+                <div class="success-glow-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h4 class="success-heading">Đặt Hàng Thành Công!</h4>
+                <p class="success-subheading">Cảm ơn bạn đã tin tưởng và ủng hộ Esports Store.</p>
+                <div class="success-receipt-card">
+                    <div class="receipt-row">
+                        <span>Mã đơn hàng:</span>
+                        <strong class="receipt-order-id" id="successOrderCode">#ESP-89214</strong>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Người nhận:</span>
+                        <span id="successCustomerName">Nguyễn Văn A</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Số điện thoại:</span>
+                        <span id="successCustomerPhone">0912 345 678</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Địa chỉ:</span>
+                        <span id="successCustomerAddress" class="text-truncate">Hà Nội</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Thanh toán:</span>
+                        <span id="successCustomerPayment">COD (Tiền mặt)</span>
+                    </div>
+                    <div class="receipt-row total-receipt">
+                        <span>Tổng tiền:</span>
+                        <strong id="successCustomerTotal">1.800.000 đ</strong>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Dự kiến giao:</span>
+                        <span style="color: #00f0ff;" id="successDeliveryEstimate">2 - 3 ngày tới</span>
+                    </div>
+                </div>
+                <div class="auto-close-container">
+                    <div class="auto-close-text">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> Tự động hoàn tất và đóng sau <span id="autoCloseCounter">3</span>s...
+                    </div>
+                    <div class="auto-close-bar-track">
+                        <div class="auto-close-bar-fill" id="autoCloseProgressBar"></div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="dismissSuccessBtn" style="width: 100%; margin-top: 12px; padding: 10px;">
+                    Đóng ngay
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- CỬA SỔ TÀI KHOẢN (ACCOUNT MODAL) -->
+    <div class="modal-backdrop" id="accountModal">
+        <div class="account-box">
+            <button type="button" class="modal-close-btn" id="accountCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="account-header">
+                <i class="fa-solid fa-gamepad" style="font-size: 2rem; color: #00f0ff;"></i>
+                <h3 id="accountModalTitle">Đăng Nhập Esports ID</h3>
+                <p>Đồng bộ giỏ hàng, lịch thi đấu và thành tích luyện tập</p>
+            </div>
+            <form id="accountForm" class="account-form">
+                <input type="text" id="accountUsername" placeholder="Tên đăng nhập hoặc Email" required>
+                <input type="password" id="accountPassword" placeholder="Mật khẩu" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Đăng Nhập</button>
+            </form>
+            <p class="account-switch">Chưa có tài khoản? <a href="account.html" id="toggleAuthMode">Đăng ký ngay</a></p>
+        </div>
+    </div>
+    <!-- Mobile Slide-out Drawer -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<aside class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+        <a href="index.html" class="logo" title="Trang Chủ">
+            <i class="fa-solid fa-gamepad"></i><span>ESPORTS</span>
+        </a>
+        <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Đóng menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="drawer-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Tìm kiếm...">
+    </div>
+
+    <nav class="drawer-nav">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+        <a href="news.html"><i class="fa-solid fa-newspaper"></i> Tin Tức</a>
+        
+        <button type="button" class="drawer-dropdown-btn" id="drawerTeamBtn">
+            <span><i class="fa-solid fa-shield-halved"></i> Đội Tuyển</span>
+            <i class="fa-solid fa-angle-down arrow"></i>
+        </button>
+        <div class="drawer-submenu" id="drawerTeamSubmenu">
+            <span class="sub-heading">Việt Nam</span>
+            <a href="roster.html?game=lq">Team Liên Quân Mobile</a>
+            <a href="roster.html?game=ff">Team Free Fire</a>
+            <a href="roster.html?game=pubg">Team PUBG Mobile</a>
+            <a href="roster.html?game=fco">Team FC Online</a>
+            <span class="sub-heading">Quốc Tế</span>
+            <a href="roster.html?game=lol">Team League of Legends (LCK)</a>
+            <a href="roster.html?game=valorant">Team Valorant (Global)</a>
+            <a href="roster.html?game=cs2">Team CS2 (Europe)</a>
+        </div>
+
+        <a href="store.html"><i class="fa-solid fa-cart-shopping"></i> Cửa Hàng</a>
+        <a href="wiki.html"><i class="fa-solid fa-book-open"></i> Wiki & Thông Số</a>
+        <a href="tournaments.html" class="active"><i class="fa-solid fa-trophy"></i> Giải Đấu</a>
+        <a href="practice.html"><i class="fa-solid fa-dumbbell"></i> Phòng Tập Luyện</a>
+        <a href="account.html"><i class="fa-solid fa-id-card"></i> Tài Khoản</a>
+            <a href="downloads.html" class="drawer-cta"><i class="fa-solid fa-download"></i> Tải Game</a>
+    </nav>
+</aside>
+
+<!-- ====================== TOURNAMENT PAGE CONTENT ====================== -->
+
+<!-- Hero Banner Giải Đấu -->
+<section class="hero" id="heroSection" style="height: 55vh; min-height: 380px;">
+    <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920">
+        <source src="video/videobackgroundfinal.mp4" type="video/mp4">
+        <source src="video/videobackgroundfinal.webm" type="video/mp4">
+        <source src="video/videobackgroundfinal.webm">
+        <source src="https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/8ab3e227121c53aacab0c9b9f7a48adbc65db520.webm" type="video/webm">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span class="badge"><i class="fa-solid fa-satellite-dish"></i> CẬP NHẬT TRỰC TIẾP</span>
+        <h1><i class="fa-solid fa-trophy"></i> GIẢI ĐẤU ESPORTS</h1>
+        <p>Theo dõi trực tiếp các giải đấu League of Legends, Free Fire và Liên Quân Mobile nóng bỏng nhất!</p>
+    </div>
+</section>
+
+<!-- Tabs lọc theo game -->
+<div class="game-tabs-container">
+    <div class="game-tabs" id="tournamentTabs">
+        <button class="tab-btn active" data-game="all"><i class="fa-solid fa-layer-group"></i> Tất Cả</button>
+        <button class="tab-btn" data-game="lol"><i class="fa-solid fa-chess-knight"></i> League of Legends</button>
+        <button class="tab-btn" data-game="ff"><i class="fa-solid fa-crosshairs"></i> Free Fire</button>
+        <button class="tab-btn" data-game="lq"><i class="fa-solid fa-shield-halved"></i> Liên Quân Mobile</button>
+        <button class="tab-btn" data-game="valorant"><i class="fa-solid fa-crosshairs"></i> Valorant</button>
+        <button class="tab-btn" data-game="fco"><i class="fa-solid fa-futbol"></i> FC Online</button>
+    </div>
+</div>
+
+<!-- ========== LEAGUE OF LEGENDS ========== -->
+<section class="section bg-darker" id="tournamentVideos">
+    <div class="section-title">
+        <h2><i class="fa-solid fa-chess-knight"></i> League of Legends</h2>
+        <p>Giải đấu chuyên nghiệp Liên Minh Huyền Thoại - LCK, MSI, CKTG • <a href="https://lolesports.com/vi-VN/" target="_blank" style="color: #00f0ff; text-decoration: underline;"><i class="fa-solid fa-arrow-up-right-from-square"></i> lolesports.com</a></p>
+    </div>
+    <div class="tournament-video-grid" data-game="lol">
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/jQx7r8Fkz6k" title="T1 vs GEN LCK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag lol">LOL</span>
+                <span class="video-status live"><i class="fa-solid fa-circle"></i> LIVE</span>
+            </div>
+            <h3>FULL HIGHLIGHTS T1 vs GEN | MATCH 29 | LCK</h3>
+            <p>Đại chiến siêu kinh điển giữa T1 và Gen.G Esports tại giải đấu LCK đỉnh cao.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 1.2M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> Hôm nay</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=jQx7r8Fkz6k" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/WyoGmgla4eo" title="T1 vs GEN Highlights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag lol">LOL</span>
+                <span class="video-status upcoming"><i class="fa-solid fa-clock"></i> SẮP DIỄN RA</span>
+            </div>
+            <h3>T1 vs GEN Highlights ALL GAMES | LCK Playoffs</h3>
+            <p>Tổng hợp những pha giao tranh nghẹt thở và macro đỉnh cao giữa hai thế lực LMHT Hàn Quốc.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 850K lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 25/11/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=WyoGmgla4eo" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/w64mRk-sYco" title="GEN vs T1 Highlights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag lol">LOL</span>
+                <span class="video-status ended"><i class="fa-solid fa-flag-checkered"></i> ĐÃ KẾT THÚC</span>
+            </div>
+            <h3>GEN vs T1 | MATCH 67 | LCK Highlights</h3>
+            <p>Trận thư hùng nảy lửa xác định ngôi đầu bảng xếp hạng LCK với màn trình diễn thượng thừa.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 2.1M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 15/06/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=w64mRk-sYco" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FREE FIRE ========== -->
+<section class="section">
+    <div class="section-title">
+        <h2><i class="fa-solid fa-crosshairs"></i> Free Fire</h2>
+        <p>Giải đấu chuyên nghiệp Free Fire - FFWS, Huyền Thoại Sinh Tồn • <a href="https://giaidau.ff.garena.vn/schedule" target="_blank" style="color: #00f0ff; text-decoration: underline;"><i class="fa-solid fa-arrow-up-right-from-square"></i> giaidau.ff.garena.vn</a></p>
+    </div>
+    <div class="tournament-video-grid" data-game="ff">
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/SPl3cCEJhq4" title="FFWS Grand Finals" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag ff">FREE FIRE</span>
+                <span class="video-status live"><i class="fa-solid fa-circle"></i> LIVE</span>
+            </div>
+            <h3>Free Fire World Series (FFWS) - Chung Kết Thế Giới</h3>
+            <p>Chung kết giải đấu Free Fire lớn nhất hành tinh với những pha Booyah mãn nhãn!</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 3.5M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> Hôm nay</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=SPl3cCEJhq4" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/tdCaxnXQu7w" title="Huyền Thoại Sinh Tồn Vòng Nhảy Dù" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag ff">FREE FIRE</span>
+                <span class="video-status upcoming"><i class="fa-solid fa-clock"></i> SẮP DIỄN RA</span>
+            </div>
+            <h3>Vòng Nhảy Dù | Bảng 1 - 6 | HUYỀN THOẠI SINH TỒN</h3>
+            <p>Giải đấu chuyên nghiệp Free Fire Việt Nam với các pha đọ súng căng thẳng đến nghẹt thở.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 580K lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 22/11/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=tdCaxnXQu7w" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/d_ZNK5MOVLc" title="Huyền Thoại Sinh Tồn Vòng Chạy Bo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag ff">FREE FIRE</span>
+                <span class="video-status ended"><i class="fa-solid fa-flag-checkered"></i> ĐÃ KẾT THÚC</span>
+            </div>
+            <h3>Vòng Chạy Bo Căng Não | Giải Đấu Huyền Thoại Sinh Tồn</h3>
+            <p>Tổng hợp những pha clutch 1v4 và xử lý kỹ năng đỉnh cao từ các tuyển thủ xuất sắc nhất.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 1.8M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 08/09/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=d_ZNK5MOVLc" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== LIÊN QUÂN MOBILE ========== -->
+<section class="section bg-darker">
+    <div class="section-title">
+        <h2><i class="fa-solid fa-shield-halved"></i> Liên Quân Mobile</h2>
+        <p>Giải đấu chuyên nghiệp Liên Quân - ĐTDV, APL, AIC • <a href="https://lienquan.garena.vn/tin-tuc/giai-dau/" target="_blank" style="color: #00f0ff; text-decoration: underline;"><i class="fa-solid fa-arrow-up-right-from-square"></i> lienquan.garena.vn</a></p>
+    </div>
+    <div class="tournament-video-grid" data-game="lq">
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/FH-Nh5UFw9s" title="ĐTDV Chung Kết" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag lq">LIÊN QUÂN</span>
+                <span class="video-status live"><i class="fa-solid fa-circle"></i> LIVE</span>
+            </div>
+            <h3>Chung Kết Quốc Gia ĐTDV | Saigon Phantom vs FPT Flash</h3>
+            <p>Trận chung kết siêu kinh điển ĐTDV giữa Saigon Phantom và FPT x Flash tranh ngôi vô địch!</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 2.8M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> Hôm nay</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=FH-Nh5UFw9s" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/RJ0NZl4BKzw" title="SGP vs 1S ĐTDV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag lq">LIÊN QUÂN</span>
+                <span class="video-status upcoming"><i class="fa-solid fa-clock"></i> SẮP DIỄN RA</span>
+            </div>
+            <h3>HIGHLIGHT: SGP vs 1S | Chung Kết Tổng Mãn Nhãn</h3>
+            <p>Cuộc rượt đuổi tỷ số kịch tính của hai đội tuyển xuất sắc nhất giải đấu Đấu Trường Danh Vọng.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 1.5M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 28/11/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=RJ0NZl4BKzw" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/UCH_HB-VpSg" title="Top Plays ĐTDV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag lq">LIÊN QUÂN</span>
+                <span class="video-status ended"><i class="fa-solid fa-flag-checkered"></i> ĐÃ KẾT THÚC</span>
+            </div>
+            <h3>5 Highlights Đỉnh Cao Chung Kết Quốc Gia ĐTDV</h3>
+            <p>Những pha outplay đi vào lịch sử và highlight giao tranh tổng bùng nổ của các ngôi sao Liên Quân.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 4.2M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 10/07/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=UCH_HB-VpSg" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== VALORANT ========== -->
+<section class="section">
+    <div class="section-title">
+        <h2><i class="fa-solid fa-crosshairs"></i> Valorant</h2>
+        <p>Giải đấu chuyên nghiệp Valorant - VCT Masters, VCT Champions • <a href="https://valorantesports.com/vi-VN/" target="_blank" style="color: #00f0ff; text-decoration: underline;"><i class="fa-solid fa-arrow-up-right-from-square"></i> valorantesports.com</a></p>
+    </div>
+    <div class="tournament-video-grid" data-game="valorant">
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/tcLt2sVTweY" title="VCT Grand Finals" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag valorant">VALORANT</span>
+                <span class="video-status live"><i class="fa-solid fa-circle"></i> LIVE</span>
+            </div>
+            <h3>LOUD vs VIT | MATCH HIGHLIGHTS | VCT Grand Finals</h3>
+            <p>Trận chung kết thế giới Valorant đỉnh cao với các pha clutch 1v3 và ngắm bắn siêu chuẩn xác.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 1.6M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> Hôm nay</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=tcLt2sVTweY" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/HkJuEcNu_8E" title="NRG vs FNC Valorant" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag valorant">VALORANT</span>
+                <span class="video-status upcoming"><i class="fa-solid fa-clock"></i> SẮP DIỄN RA</span>
+            </div>
+            <h3>NRG vs FNC — VALORANT Champions Paris — Grand Finals</h3>
+            <p>Cuộc đối đầu kinh điển giữa hai gã khổng lồ phương Tây tại đấu trường VCT Champions.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 720K lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 26/11/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=HkJuEcNu_8E" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/e_E9W2vsRbQ" title="Valorant Duelists" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag valorant">VALORANT</span>
+                <span class="video-status ended"><i class="fa-solid fa-flag-checkered"></i> ĐÃ KẾT THÚC</span>
+            </div>
+            <h3>DUELISTS // Official Cinematic Trailer - VALORANT</h3>
+            <p>Siêu phẩm điện ảnh mở màn cho thế giới đặc vụ Valorant với Phoenix và Jett!</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 3.8M lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 20/08/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=e_E9W2vsRbQ" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FC ONLINE ========== -->
+<section class="section bg-darker">
+    <div class="section-title">
+        <h2><i class="fa-solid fa-futbol"></i> FC Online</h2>
+        <p>Giải đấu chuyên nghiệp FC Online - FVPL Summer, FVPL Spring • <a href="https://fconline.garena.vn/tin-tuc/giai-dau/" target="_blank" style="color: #00f0ff; text-decoration: underline;"><i class="fa-solid fa-arrow-up-right-from-square"></i> fconline.garena.vn</a></p>
+    </div>
+    <div class="tournament-video-grid" data-game="fco">
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/JmA-bW3OSOE" title="FVPL Summer Chung Kết" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag fco">FC ONLINE</span>
+                <span class="video-status live"><i class="fa-solid fa-circle"></i> LIVE</span>
+            </div>
+            <h3>Chung Kết: NK vs TAG Quyết Chiến Ngôi Vương | FVPL Summer</h3>
+            <p>Trận chung kết đỉnh cao của giải đấu thể thao điện tử bóng đá chuyên nghiệp hàng đầu Việt Nam.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 450K lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> Hôm nay</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=JmA-bW3OSOE" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/FmyJa95ktJg" title="FVPL Spring Vòng Chung Kết" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag fco">FC ONLINE</span>
+                <span class="video-status upcoming"><i class="fa-solid fa-clock"></i> SẮP DIỄN RA</span>
+            </div>
+            <h3>Vòng Chung Kết: NK, SGLX, FPT, TKO | FVPL Spring</h3>
+            <p>Tứ linh hội tụ cùng tranh đấu giành cúp vàng vô địch với những bàn thắng mãn nhãn.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 320K lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 24/11/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=FmyJa95ktJg" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+        <div class="tournament-video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/N-d0btVvCmI" title="Nhìn lại FVPL Summer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-game-tag fco">FC ONLINE</span>
+                <span class="video-status ended"><i class="fa-solid fa-flag-checkered"></i> ĐÃ KẾT THÚC</span>
+            </div>
+            <h3>Nhìn Lại Vòng Chung Kết FVPL Summer – Mùa Hè Bùng Nổ</h3>
+            <p>Tổng hợp các siêu phẩm sút xa, tiki-taka điệu nghệ và những khoảnh khắc vỡ òa cảm xúc.</p>
+            <div class="video-meta">
+                <span><i class="fa-solid fa-eye"></i> 890K lượt xem</span>
+                <span><i class="fa-solid fa-calendar"></i> 05/10/2026</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=N-d0btVvCmI" target="_blank" class="video-yt-link-btn">
+                <i class="fa-brands fa-youtube"></i> Xem Trên YouTube
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== LỊCH THI ĐẤU THEO THỜI GIAN THỰC ========== -->
+<section class="section" id="tournamentScheduleSection">
+    <div class="section-title">
+        <h2><i class="fa-solid fa-calendar-days"></i> Lịch Thi Đấu Theo Thời Gian Thực</h2>
+        <p>Cập nhật tự động theo ngày — <span id="scheduleCurrentDate" style="color: #00f0ff;"></span></p>
+    </div>
+    <div class="schedule-game-filter" id="scheduleGameFilter">
+        <button class="sgf-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> Tất Cả</button>
+        <button class="sgf-btn" data-filter="lol"><i class="fa-solid fa-chess-knight"></i> LOL</button>
+        <button class="sgf-btn" data-filter="ff"><i class="fa-solid fa-crosshairs"></i> Free Fire</button>
+        <button class="sgf-btn" data-filter="lq"><i class="fa-solid fa-shield-halved"></i> Liên Quân</button>
+        <button class="sgf-btn" data-filter="valorant"><i class="fa-solid fa-crosshairs"></i> Valorant</button>
+        <button class="sgf-btn" data-filter="fco"><i class="fa-solid fa-futbol"></i> FC Online</button>
+    </div>
+    <div id="dynamicScheduleContainer" class="dynamic-schedule-container">
+        <!-- JS will render schedule here -->
+    </div>
+</section>
+
+    <!-- ================= FOOTER CHUYÊN NGHIỆP ================= -->
+<footer class="footer-section">
+    <div class="footer-container">
+        
+        <!-- Cột 1: Thông tin thương hiệu & công ty -->
+        <div class="footer-col brand-col">
+            <div class="footer-logo">
+                <i class="fa-solid fa-gamepad"></i><span>ESPORTS</span>
+            </div>
+            <p class="company-name">CÔNG TY TNHH ESPORTS VIỆT NAM</p>
+            <ul class="contact-info">
+                <li><i class="fa-solid fa-location-dot"></i> <strong>Việt Nam:</strong> Học Viện Công Nghệ Bưu chính viễn thông</li>
+                <li><i class="fa-solid fa-phone"></i> <strong>Số điện thoại:</strong> 0975 477 485</li>
+                <li><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> support@esports.gg</li>
+            </ul>
+        </div>
+
+        <!-- Cột 2: Về chúng tôi -->
+        <div class="footer-col">
+            <h3>Về Chúng Tôi</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Giới thiệu</a></li>
+                <li><a href="roster.html">Đội ngũ tuyển thủ</a></li>
+                <li><a href="news.html">Tin tức sự kiện</a></li>
+                <li><a href="#">Hợp tác tài trợ</a></li>
+            </ul>
+        </div>
+
+        <!-- Cột 3: Hỗ trợ khách hàng -->
+        <div class="footer-col">
+            <h3>Hỗ Trợ Khách Hàng</h3>
+            <ul class="footer-links">
+                <li><a href="#">Hướng dẫn chọn size</a></li>
+                <li><a href="#">Chính sách đổi trả</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Hướng dẫn mua hàng</a></li>
+                <li><a href="#">Chính sách kiểm hàng</a></li>
+                <li><a href="#">Hướng dẫn thanh toán</a></li>
+                <li><a href="#">Chính sách vận chuyển</a></li>
+            </ul>
+        </div>
+
+        <!-- Cột 4: Đăng ký nhận tin & Mạng xã hội -->
+        <div class="footer-col newsletter-col">
+            <h3>Đăng Ký Nhận Tin</h3>
+            <p>Bạn có muốn nhận khuyến mãi đặc biệt và tin tức giải đấu? Đăng ký ngay.</p>
+            <form class="footer-form" id="footerNewsletter">
+                <input type="email" placeholder="Nhập địa chỉ email..." required>
+                <button type="submit">Đăng ký</button>
+            </form>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-solid fa-comment"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần dưới: Dấu hiệu Bộ Công Thương & Thanh toán -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <div class="payment-methods">
+                <span class="pay-badge">VISA</span>
+                <span class="pay-badge">Mastercard</span>
+                <span class="pay-badge">MoMo</span>
+                <span class="pay-badge">ZaloPay</span>
+                <span class="pay-badge">COD</span>
+            </div>
+        </div>
+        <p class="copyright">© Bản quyền thuộc về Esports | MST 0317627061 | Thiết kế chuyên nghiệp</p>
+    </div>
+
+    <!-- Các nút nổi hỗ trợ bên phải (Cuộn lên đầu trang, Gọi, Zalo) -->
+    <div class="floating-actions">
+        <a href="#" class="float-btn scroll-top"><i class="fa-solid fa-chevron-up"></i></a>
+        <a href="tel:0975477485" class="float-btn phone-btn"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://zalo.me" target="_blank" class="float-btn zalo-btn">Zalo</a>
+    </div>
+</footer>
+    <script src="script.js"></script>
+    <script>
+    // === LỌC VIDEO GIẢI ĐẤU THEO TAB & THAM SỐ URL ===
+    const tournamentTabBtns = document.querySelectorAll('#tournamentTabs .tab-btn');
+    const allVideoSections = [];
+    document.querySelectorAll('.tournament-video-grid').forEach(grid => {
+        allVideoSections.push(grid.closest('.section'));
+    });
+
+    function filterTournamentsByGame(selectedGame) {
+        tournamentTabBtns.forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-game') === selectedGame);
+        });
+
+        allVideoSections.forEach(section => {
+            const grid = section.querySelector('.tournament-video-grid');
+            if (!grid) return;
+            const gameType = grid.getAttribute('data-game');
+            
+            if (selectedGame === 'all') {
+                section.style.display = '';
+            } else {
+                section.style.display = (gameType === selectedGame) ? '' : 'none';
+            }
+        });
+    }
+
+    tournamentTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const selectedGame = btn.getAttribute('data-game');
+            filterTournamentsByGame(selectedGame);
+            const newUrl = selectedGame === 'all' ? 'tournaments.html' : `tournaments.html?game=${selectedGame}`;
+            window.history.replaceState(null, '', newUrl);
+        });
+    });
+
+    // Hỗ trợ tham số URL ?game=lol, ?game=ff, ?game=lq, ?game=valorant, ?game=fco
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameParam = urlParams.get('game');
+    if (gameParam && ['lol', 'ff', 'lq', 'valorant', 'fco'].includes(gameParam)) {
+        filterTournamentsByGame(gameParam);
+    }
+
+    // Khởi tạo lịch thi đấu động
+    if (typeof generateTournamentSchedule === 'function') {
+        generateTournamentSchedule();
+    }
+    </script>
+</body>
+</html>

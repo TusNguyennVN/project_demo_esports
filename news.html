@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esports - Tin Tức</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navbar với menu Dropdown -->
+    <header class="header">
+    <a href="index.html" class="logo" title="Trang Chủ">
+    <i class="fa-solid fa-gamepad"></i><span>ESPORTS</span>
+    </a>
+<nav class="navbar">
+    <a href="news.html" class="active"><i class="fa-solid fa-newspaper"></i> Tin Tức</a>
+    
+    <!-- Dropdown Menu Đội Tuyển -->
+    <div class="dropdown">
+        <a href="roster.html" class="dropdown-toggle">
+            <i class="fa-solid fa-shield-halved"></i> Đội Tuyển 
+            <i class="fa-solid fa-angle-down" style="font-size: 0.75rem;"></i>
+        </a>
+        <div class="dropdown-menu">
+            <div class="dropdown-column">
+                <h4>Việt Nam</h4>
+                <a href="roster.html?game=lq">Team Liên Quân Mobile</a>
+                <a href="roster.html?game=ff">Team Free Fire</a>
+                <a href="roster.html?game=pubg">Team PUBG Mobile</a>
+                <a href="roster.html?game=fco">Team FC Online</a>
+            </div>
+            <div class="dropdown-column">
+                <h4>Quốc Tế</h4>
+                <a href="roster.html?game=lol">Team League of Legends (LCK)</a>
+                <a href="roster.html?game=valorant">Team Valorant (Global)</a>
+                <a href="roster.html?game=cs2">Team CS2 (Europe)</a>
+            </div>
+        </div>
+    </div>
+
+<a href="store.html" class="store-nav-link">
+    <i class="fa-solid fa-cart-shopping"></i> 
+    <span>Cửa hàng</span>
+</a>
+<div class="dropdown">
+    <a href="wiki.html" class="dropdown-toggle">
+        <i class="fa-solid fa-book-open"></i> Wiki & Thông Số 
+        <i class="fa-solid fa-angle-down" style="font-size: 0.75rem;"></i>
+    </a>
+    <div class="dropdown-menu wiki-dropdown-menu">
+        <div class="dropdown-column">
+            <h4>Tướng & Nhân Vật</h4>
+            <a href="wiki.html?tab=lol-champ">Tướng Liên Minh (LOL)</a>
+            <a href="wiki.html?tab=lq-champ">Tướng Liên Quân Mobile</a>
+            <a href="wiki.html?tab=ff-char">Nhân Vật Free Fire</a>
+        </div>
+        <div class="dropdown-column">
+            <h4>Trang Bị & Vũ Khí</h4>
+            <a href="wiki.html?game=lol&type=equipment">Trang Bị LMHT</a>
+            <a href="wiki.html?game=lq&type=equipment">Trang Bị Liên Quân</a>
+            <a href="wiki.html?game=ff&type=equipment">Vũ Khí Free Fire</a>
+        </div>
+    </div>
+</div>
+    <a href="tournaments.html"><i class="fa-solid fa-trophy"></i> Giải Đấu</a>
+    <a href="practice.html"><i class="fa-solid fa-dumbbell"></i> Phòng Tập Luyện</a>
+    <a href="downloads.html"><i class="fa-solid fa-download"></i> Tải Game</a>
+</nav>
+<div class="header-right">
+            <!-- 1. Tìm kiếm -->
+            <div class="search-box" id="headerSearchBox">
+                <button type="button" class="search-icon-btn" id="searchToggleBtn" title="Tìm kiếm" aria-label="Tìm kiếm">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <input type="text" id="globalSearch" placeholder="Tìm kiếm...">
+            </div>
+
+            <!-- 2. Giỏ hàng đã thêm (kèm số lượng) -->
+            <button type="button" class="header-action-btn" id="cartToggleBtn" title="Giỏ hàng" aria-label="Giỏ hàng">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+
+            <!-- 3. Chọn Ngôn ngữ -->
+            <div class="lang-dropdown" id="langDropdown">
+                <button type="button" class="header-action-btn" id="langToggleBtn" title="Ngôn ngữ" aria-label="Ngôn ngữ">
+                    <i class="fa-solid fa-globe"></i>
+                </button>
+                <div class="lang-menu" id="langMenu">
+                    <button type="button" class="lang-option active" data-lang="VI">🇻🇳 Tiếng Việt (VN)</button>
+                    <button type="button" class="lang-option" data-lang="EN">🇺🇸 English (EN)</button>
+                </div>
+            </div>
+            <!-- Tài khoản User Dropdown (Phong cách Riot Games) -->
+            <div class="user-menu-wrapper" id="userMenuWrapper">
+                <button type="button" class="header-action-btn account-btn" id="accountToggleBtn" title="Tài khoản" aria-label="Tài khoản">
+                    <i class="fa-solid fa-user" id="headerUserIcon"></i>
+                    <img src="images/faker_league_of_legends_esports.png" alt="Avatar" class="header-user-avatar" id="headerUserAvatar" style="display: none;">
+                </button>
+                <div class="user-profile-dropdown" id="userProfileDropdown">
+                    <div class="up-header">
+                        <img src="images/faker_league_of_legends_esports.png" alt="Avatar" class="up-avatar" id="upAvatarImg">
+                        <div class="up-info">
+                            <span class="up-name" id="upRiotId">Tunguyen#2026</span>
+                            <span class="up-email" id="upEmail">tunguyen@esports.gg</span>
+                        </div>
+                    </div>
+                    <div class="up-wallet-bar">
+                        <div class="up-wallet-left">
+                            <span class="up-wallet-label"><i class="fa-solid fa-wallet" style="color: #10b981;"></i> Số dư ví:</span>
+                            <span class="up-wallet-val" id="upWalletBalance">500.000 đ</span>
+                        </div>
+                        <a href="account.html?tab=wallet" class="up-wallet-btn">
+                            <i class="fa-solid fa-plus-circle"></i> Nạp
+                        </a>
+                    </div>
+                    <div class="up-links">
+                        <a href="account.html?tab=riot-id"><i class="fa-solid fa-id-badge" style="color: #00f0ff;"></i> Thông Tin ID</a>
+                        <a href="account.html?tab=wallet"><i class="fa-solid fa-wallet" style="color: #10b981;"></i> Nạp Tiền & Ví Điện Tử</a>
+                        <a href="account.html?tab=charity"><i class="fa-solid fa-hand-holding-heart" style="color: #ec4899;"></i> Quyên Góp Từ Thiện</a>
+                        <a href="account.html?tab=orders"><i class="fa-solid fa-box-open" style="color: #f59e0b;"></i> Lịch Sử Đơn Hàng</a>
+                        <a href="account.html?tab=security"><i class="fa-solid fa-shield-halved" style="color: #3b82f6;"></i> Bảo Mật & 2FA</a>
+                        <button type="button" class="up-logout-btn" id="upLogoutBtn">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng Xuất
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút 3 gạch khi thu nhỏ màn hình -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mở menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <!-- NGĂN KÉO GIỎ HÀNG ĐÃ THÊM (CART DRAWER) -->
+    <div class="side-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <!-- HEADER VỚI TAB CHUYỂN ĐỔI -->
+        <div class="drawer-header cart-drawer-header">
+            <div class="cart-nav-tabs">
+                <button type="button" class="cart-tab-btn active" id="cartTabBtnCart" title="Xem giỏ hàng">
+                    <i class="fa-solid fa-bag-shopping"></i> <span>Giỏ Hàng</span>
+                    <span class="cart-tab-badge" id="cartTabBadgeCount">0</span>
+                </button>
+                <button type="button" class="cart-tab-btn" id="cartTabBtnCheckout" title="Thông tin đặt hàng">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> <span>Đặt Hàng</span>
+                </button>
+            </div>
+            <button type="button" class="drawer-close-btn" id="cartCloseBtn" aria-label="Đóng"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- TAB 1: DANH SÁCH GIỎ HÀNG -->
+        <div class="cart-view-pane active" id="cartPaneItems">
+            <div class="cart-items-list" id="cartItemsList">
+                <p class="empty-cart-msg">Chưa có sản phẩm nào trong giỏ hàng.</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <span>Tổng cộng:</span>
+                    <strong id="cartTotalPrice">0 đ</strong>
+                </div>
+                <button type="button" class="btn btn-primary" id="checkoutBtn" style="width: 100%;">
+                    <span>Thanh Toán Ngay</span> <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB 2: THÔNG TIN ĐẶT HÀNG -->
+        <div class="cart-view-pane" id="cartPaneCheckout">
+            <div class="checkout-scroll-area">
+                <button type="button" class="checkout-back-btn" id="checkoutBackToCartBtn">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Quay lại giỏ hàng</span>
+                </button>
+
+                <form id="orderForm" autocomplete="on" onsubmit="return false;">
+                    <!-- Họ tên & Số điện thoại -->
+                    <div class="checkout-form-group">
+                        <label for="orderRecipientName"><i class="fa-solid fa-user"></i> Họ tên người nhận <span class="req">*</span></label>
+                        <input type="text" id="orderRecipientName" class="checkout-input" placeholder="Ví dụ: Nguyễn Văn A" required>
+                    </div>
+
+                    <div class="checkout-form-group">
+                        <label for="orderPhone"><i class="fa-solid fa-phone"></i> Số điện thoại nhận hàng <span class="req">*</span></label>
+                        <input type="tel" id="orderPhone" class="checkout-input" placeholder="Ví dụ: 0912 345 678" required>
+                    </div>
+
+                    <!-- Địa chỉ nhận hàng -->
+                    <div class="checkout-form-group">
+                        <label for="orderAddress"><i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng <span class="req">*</span></label>
+                        <textarea id="orderAddress" class="checkout-input checkout-textarea" rows="2" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành..." required></textarea>
+                    </div>
+
+                    <!-- Ước tính thời gian nhận hàng -->
+                    <div class="checkout-delivery-card">
+                        <div class="delivery-card-header">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Ước tính thời gian nhận hàng</span>
+                        </div>
+                        <div class="delivery-estimate-badge">
+                            <div class="delivery-estimate-main"><i class="fa-solid fa-bolt" style="color: #00f0ff;"></i> <strong>2 - 3 ngày làm việc</strong></div>
+                            <div class="delivery-estimate-date" id="orderDeliveryDateText">Dự kiến giao: 2 - 3 ngày tới</div>
+                        </div>
+                        <div class="delivery-courier-tag">
+                            <i class="fa-solid fa-truck-fast"></i> Đơn vị vận chuyển: Esports Express (Giao hàng tận nơi)
+                        </div>
+                    </div>
+
+                    <!-- Phương thức thanh toán -->
+                    <div class="checkout-form-group">
+                        <label><i class="fa-solid fa-wallet"></i> Phương thức thanh toán <span class="req">*</span></label>
+                        <div class="payment-methods-grid">
+                            <label class="payment-method-card selected">
+                                <input type="radio" name="orderPaymentMethod" value="COD" checked>
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-hand-holding-dollar"></i> Tiền mặt khi nhận hàng (COD)</div>
+                                    <div class="pm-desc">Kiểm tra hàng trước khi thanh toán</div>
+                                </div>
+                            </label>
+                            <label class="payment-method-card" id="walletPaymentCard">
+                                <input type="radio" name="orderPaymentMethod" value="WALLET">
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-wallet" style="color: #10b981;"></i> Ví Tiền Esports (<span id="checkoutWalletBalanceLabel">500.000 đ</span>)</div>
+                                    <div class="pm-desc" id="checkoutWalletDesc">Trừ trực tiếp số dư tài khoản web</div>
+                                </div>
+                            </label>
+                            <label class="payment-method-card">
+                                <input type="radio" name="orderPaymentMethod" value="BANK">
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-qrcode"></i> Chuyển khoản VietQR / Banking</div>
+                                    <div class="pm-desc">Quét mã QR tự động 24/7</div>
+                                </div>
+                            </label>
+                            <label class="payment-method-card">
+                                <input type="radio" name="orderPaymentMethod" value="EWALLET">
+                                <span class="pm-radio-custom"></span>
+                                <div class="pm-details">
+                                    <div class="pm-title"><i class="fa-solid fa-mobile-screen-button"></i> Ví MoMo / ZaloPay</div>
+                                    <div class="pm-desc">Thanh toán tức thì bảo mật</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Mã giảm giá -->
+                    <div class="checkout-form-group">
+                        <label for="orderCouponInput"><i class="fa-solid fa-ticket"></i> Mã giảm giá</label>
+                        <div class="coupon-action-box">
+                            <input type="text" id="orderCouponInput" class="checkout-input coupon-input" placeholder="Nhập mã ưu đãi...">
+                            <button type="button" class="btn-coupon-apply" id="applyCouponBtn">Áp dụng</button>
+                        </div>
+                        <div class="coupon-status-msg" id="couponStatusMsg"></div>
+                        <div class="coupon-chips">
+                            <span>Gợi ý:</span>
+                            <button type="button" class="coupon-chip-btn" data-code="ESPORTS">ESPORTS (-10%)</button>
+                            <button type="button" class="coupon-chip-btn" data-code="FREESHIP">FREESHIP</button>
+                        </div>
+                    </div>
+
+                    <!-- Bảng tóm tắt đơn hàng -->
+                    <div class="checkout-summary-card">
+                        <div class="summary-line">
+                            <span>Tạm tính (<span id="checkoutSummaryQty">0</span> món):</span>
+                            <span id="checkoutSummarySubtotal">0 đ</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Phí vận chuyển:</span>
+                            <span id="checkoutSummaryShipping" class="free-ship">Miễn phí</span>
+                        </div>
+                        <div class="summary-line discount-line" id="checkoutDiscountRow" style="display: none;">
+                            <span>Mã giảm giá (<span id="checkoutCouponTag"></span>):</span>
+                            <span id="checkoutDiscountAmount">-0 đ</span>
+                        </div>
+                        <div class="summary-line total-line">
+                            <span>Tổng thanh toán:</span>
+                            <strong id="checkoutGrandTotal">0 đ</strong>
+                        </div>
+                    </div>
+
+                    <!-- Thông báo lỗi nhập form -->
+                    <div class="checkout-error-banner" id="checkoutFormError" style="display: none;"></div>
+
+                    <!-- Nút xác nhận đặt hàng -->
+                    <button type="button" class="btn btn-primary" id="confirmOrderBtn" style="width: 100%; margin-top: 15px; padding: 12px;">
+                        <i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i> Xác Nhận Đặt Hàng
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- THÔNG BÁO ĐẶT HÀNG THÀNH CÔNG VỚI TỰ ĐỘNG TẮT -->
+        <div class="order-success-modal" id="orderSuccessModal">
+            <div class="order-success-content">
+                <div class="success-glow-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h4 class="success-heading">Đặt Hàng Thành Công!</h4>
+                <p class="success-subheading">Cảm ơn bạn đã tin tưởng và ủng hộ Esports Store.</p>
+                <div class="success-receipt-card">
+                    <div class="receipt-row">
+                        <span>Mã đơn hàng:</span>
+                        <strong class="receipt-order-id" id="successOrderCode">#ESP-89214</strong>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Người nhận:</span>
+                        <span id="successCustomerName">Nguyễn Văn A</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Số điện thoại:</span>
+                        <span id="successCustomerPhone">0912 345 678</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Địa chỉ:</span>
+                        <span id="successCustomerAddress" class="text-truncate">Hà Nội</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Thanh toán:</span>
+                        <span id="successCustomerPayment">COD (Tiền mặt)</span>
+                    </div>
+                    <div class="receipt-row total-receipt">
+                        <span>Tổng tiền:</span>
+                        <strong id="successCustomerTotal">1.800.000 đ</strong>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Dự kiến giao:</span>
+                        <span style="color: #00f0ff;" id="successDeliveryEstimate">2 - 3 ngày tới</span>
+                    </div>
+                </div>
+                <div class="auto-close-container">
+                    <div class="auto-close-text">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> Tự động hoàn tất và đóng sau <span id="autoCloseCounter">3</span>s...
+                    </div>
+                    <div class="auto-close-bar-track">
+                        <div class="auto-close-bar-fill" id="autoCloseProgressBar"></div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="dismissSuccessBtn" style="width: 100%; margin-top: 12px; padding: 10px;">
+                    Đóng ngay
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- CỬA SỔ TÀI KHOẢN (ACCOUNT MODAL) -->
+    <div class="modal-backdrop" id="accountModal">
+        <div class="account-box">
+            <button type="button" class="modal-close-btn" id="accountCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="account-header">
+                <i class="fa-solid fa-gamepad" style="font-size: 2rem; color: #00f0ff;"></i>
+                <h3 id="accountModalTitle">Đăng Nhập Esports ID</h3>
+                <p>Đồng bộ giỏ hàng, lịch thi đấu và thành tích luyện tập</p>
+            </div>
+            <form id="accountForm" class="account-form">
+                <input type="text" id="accountUsername" placeholder="Tên đăng nhập hoặc Email" required>
+                <input type="password" id="accountPassword" placeholder="Mật khẩu" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Đăng Nhập</button>
+            </form>
+            <p class="account-switch">Chưa có tài khoản? <a href="account.html" id="toggleAuthMode">Đăng ký ngay</a></p>
+        </div>
+    </div>
+    <!-- Mobile Slide-out Drawer -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<aside class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+        <a href="index.html" class="logo" title="Trang Chủ">
+            <i class="fa-solid fa-gamepad"></i><span>ESPORTS</span>
+        </a>
+        <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Đóng menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="drawer-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Tìm kiếm...">
+    </div>
+
+    <nav class="drawer-nav">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+        <a href="news.html"><i class="fa-solid fa-newspaper"></i> Tin Tức</a>
+        
+        <button type="button" class="drawer-dropdown-btn" id="drawerTeamBtn">
+            <span><i class="fa-solid fa-shield-halved"></i> Đội Tuyển</span>
+            <i class="fa-solid fa-angle-down arrow"></i>
+        </button>
+        <div class="drawer-submenu" id="drawerTeamSubmenu">
+            <span class="sub-heading">Việt Nam</span>
+            <a href="roster.html?game=lq">Team Liên Quân Mobile</a>
+            <a href="roster.html?game=ff">Team Free Fire</a>
+            <a href="roster.html?game=pubg">Team PUBG Mobile</a>
+            <a href="roster.html?game=fco">Team FC Online</a>
+            <span class="sub-heading">Quốc Tế</span>
+            <a href="roster.html?game=lol">Team League of Legends (LCK)</a>
+            <a href="roster.html?game=valorant">Team Valorant (Global)</a>
+            <a href="roster.html?game=cs2">Team CS2 (Europe)</a>
+        </div>
+
+        <a href="store.html"><i class="fa-solid fa-cart-shopping"></i> Cửa Hàng</a>
+        <a href="wiki.html"><i class="fa-solid fa-book-open"></i> Wiki & Thông Số</a>
+        <a href="tournaments.html"><i class="fa-solid fa-trophy"></i> Giải Đấu</a>
+        <a href="practice.html"><i class="fa-solid fa-dumbbell"></i> Phòng Tập Luyện</a>
+        <a href="downloads.html" class="drawer-cta"><i class="fa-solid fa-download"></i> Tải Game</a>
+    </nav>
+</aside>
+<section class="section" style="margin-top: 60px;">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-newspaper"></i> Bản Tin Esports Mới Nhất</h2>
+            <p>Tổng hợp mọi diễn biến nóng hổi từ các giải đấu chuyên nghiệp</p>
+        </div>
+
+        <!-- Thanh lọc tin tức theo tựa game -->
+        <div class="game-tabs" id="newsFilterTabs" style="margin-bottom: 40px;">
+            <button class="tab-btn active" data-game="all">Tất Cả</button>
+            <button class="tab-btn" data-game="lol">League of Legends</button>
+            <button class="tab-btn" data-game="valorant">Valorant</button>
+            <button class="tab-btn" data-game="lq">Liên Quân Mobile</button>
+        </div>
+        
+        <div class="news-grid" id="newsContainer">
+            <!-- Bài viết 1: gắn data-category="lol" -->
+            <article class="news-card" data-category="lol">
+                <div class="news-img" style="background: linear-gradient(45deg, #0f172a, #1e293b);">
+                    <span class="game-tag lol">LOL</span>
+                </div>
+                <div class="news-info">
+                    <span class="date">14/11/2026</span>
+                    <h3>Chung kết thế giới LOL: Đội tuyển hạt giống số 1 chốt đội hình</h3>
+                    <p>Những thay đổi về meta và chiến thuật cấm chọn hứa hẹn loạt trận bùng nổ...</p>
+                    <a href="#" class="read-more">Đọc thêm <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Bài viết 2: gắn data-category="valorant" -->
+            <article class="news-card" data-category="valorant">
+                <div class="news-img" style="background: linear-gradient(45deg, #180e29, #3b1e35);">
+                    <span class="game-tag valorant">VALORANT</span>
+                </div>
+                <div class="news-info">
+                    <span class="date">13/11/2026</span>
+                    <h3>Bản cập nhật đặc vụ mới Valorant: Sức mạnh đảo lộn bảng đấu</h3>
+                    <p>Nhà phát triển chính thức hé lộ kỹ năng của đặc vụ khởi tranh mùa giải mới...</p>
+                    <a href="#" class="read-more">Đọc thêm <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+   <!-- ================= FOOTER CHUYÊN NGHIỆP ================= -->
+<footer class="footer-section">
+    <div class="footer-container">
+        
+        <!-- Cột 1: Thông tin thương hiệu & công ty -->
+        <div class="footer-col brand-col">
+            <div class="footer-logo">
+                <i class="fa-solid fa-gamepad"></i><span>ESPORTS</span>
+            </div>
+            <p class="company-name">CÔNG TY TNHH ESPORTS VIỆT NAM</p>  
+            <ul class="contact-info">
+                <li><i class="fa-solid fa-location-dot"></i> <strong>Việt Nam:</strong> Học Viện Công Nghệ Bưu chính viễn thông</li>
+                <li><i class="fa-solid fa-phone"></i> <strong>Số điện thoại:</strong> 0975 477 485</li>
+                <li><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> support@esports.gg</li>
+            </ul>
+        </div>
+
+        <!-- Cột 2: Về chúng tôi -->
+        <div class="footer-col">
+            <h3>Về Chúng Tôi</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Giới thiệu</a></li>
+                <li><a href="roster.html">Đội ngũ tuyển thủ</a></li>
+                <li><a href="news.html">Tin tức sự kiện</a></li>
+                <li><a href="#">Hợp tác tài trợ</a></li>
+            </ul>
+        </div>
+
+        <!-- Cột 3: Hỗ trợ khách hàng -->
+        <div class="footer-col">
+            <h3>Hỗ Trợ Khách Hàng</h3>
+            <ul class="footer-links">
+                <li><a href="#">Hướng dẫn chọn size</a></li>
+                <li><a href="#">Chính sách đổi trả</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Hướng dẫn mua hàng</a></li>
+                <li><a href="#">Chính sách kiểm hàng</a></li>
+                <li><a href="#">Hướng dẫn thanh toán</a></li>
+                <li><a href="#">Chính sách vận chuyển</a></li>
+            </ul>
+        </div>
+
+        <!-- Cột 4: Đăng ký nhận tin & Mạng xã hội -->
+        <div class="footer-col newsletter-col">
+            <h3>Đăng Ký Nhận Tin</h3>
+            <p>Bạn có muốn nhận khuyến mãi đặc biệt và tin tức giải đấu? Đăng ký ngay.</p>
+            <form class="footer-form" id="footerNewsletter">
+                <input type="email" placeholder="Nhập địa chỉ email..." required>
+                <button type="submit">Đăng ký</button>
+            </form>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-solid fa-comment"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần dưới: Dấu hiệu Bộ Công Thương & Thanh toán -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <div class="payment-methods">
+                <span class="pay-badge">VISA</span>
+                <span class="pay-badge">Mastercard</span>
+                <span class="pay-badge">MoMo</span>
+                <span class="pay-badge">ZaloPay</span>
+                <span class="pay-badge">COD</span>
+            </div>
+        </div>
+        <p class="copyright">© Bản quyền thuộc về Esports | MST 0317627061 | Thiết kế chuyên nghiệp</p>
+    </div>
+
+    <!-- Các nút nổi hỗ trợ bên phải (Cuộn lên đầu trang, Gọi, Zalo) -->
+    <div class="floating-actions">
+        <a href="#" class="float-btn scroll-top"><i class="fa-solid fa-chevron-up"></i></a>
+        <a href="tel:0975477485" class="float-btn phone-btn"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://zalo.me" target="_blank" class="float-btn zalo-btn">Zalo</a>
+    </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

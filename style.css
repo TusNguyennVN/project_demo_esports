@@ -1,0 +1,5446 @@
+/* ==========================================================
+    ESPORTS - ULTIMATE GAMING STYLESHEET (STYLE.CSS)
+   ================ ========================================== */
+
+/* --- 1. RESET & BASE STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #05070d;
+    color: #f1f5f9;
+    line-height: 1.6;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 40%);
+    overflow-x: hidden;
+}
+/* Custom Gaming Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #05070d;
+}
+::-webkit-scrollbar-thumb {
+    background: #00f0ff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #00f0ff;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    list-style: none;
+}
+/* --- 2. HEADER & CENTERED NAVBAR --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* 3 cột: Logo, Menu căn giữa, Thanh tìm kiếm */
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(5, 7, 13, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(0, 240, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 240, 255, 0.1);
+    z-index: 1000;
+}
+.logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.logo i {
+    color: #00f0ff;
+    filter: drop-shadow(0 0 10px #00f0ff);
+}
+
+.logo span {
+    color: #00f0ff;
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.8), 0 0 30px rgba(0, 240, 255, 0.4);
+}
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    align-items: center;
+}
+.navbar a {
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 6px 2px;
+    transition: color 0.3s ease;
+}
+/* Hiệu ứng gạch chân Neon cho Navbar */
+.navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(90deg, #00f0ff, #3b82f6);
+    box-shadow: 0 0 12px #00f0ff, 0 0 20px #3b82f6;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.navbar a:hover::after, 
+.navbar a.active::after {
+    width: 100%;
+}
+.navbar a:hover, 
+.navbar a.active {
+    color: #00f0ff;
+    text-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+}
+/* Header Search Box - Tách rời hoàn toàn với nút 3 gạch */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-right .search-box {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    z-index: 1200;
+}
+
+.header-right .search-icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    color: #00f0ff;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1202;
+}
+
+.header-right .search-icon-btn i {
+    position: static;
+    transform: none;
+    color: #00f0ff;
+    filter: drop-shadow(0 0 6px #00f0ff);
+}
+
+.header-right .search-icon-btn:hover,
+.header-right .search-box.active .search-icon-btn {
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.12);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+}
+
+/* Ô input bung sang trái nên không bao giờ đè lên nút 3 gạch */
+.header-right input {
+    position: absolute;
+    right: 0;
+    top: 52px; /* Nằm ngay dưới thanh Header */
+    height: 44px;
+    width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    padding: 10px 18px;
+    background: rgba(11, 15, 25, 0.98);
+    border: 1px solid #00f0ff;
+    border-radius: 22px;
+    color: #fff;
+    outline: none;
+    font-size: 0.92rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 15px rgba(0, 240, 255, 0.4);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1201;
+}
+
+.header-right .search-box.active input {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+/* --- 3. HERO SECTION (VIDEO BACKGROUND KIỂU LOL) --- */
+.hero {
+    height: 88vh;
+    min-height: 550px;
+    background: #05070d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    margin-top: 65px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(0, 240, 255, 0.3);
+}
+
+/* Video nền phủ kín khung Hero */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* Lớp phủ gradient tối để làm nổi bật tiêu đề */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(5, 7, 13, 0.55) 0%,
+        rgba(5, 7, 13, 0.65) 60%,
+        rgba(5, 7, 13, 0.96) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero-content .badge {
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    border: 1px solid rgba(0, 240, 255, 0.45);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-content h1 {
+    font-size: 3.2rem;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #ffffff, #00f0ff, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.85));
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    max-width: 750px;
+    margin: 0 auto 30px;
+    color: #e2e8f0;
+    font-size: 1.15rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.hero-btns {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/* --- 4. BUTTONS --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 100%;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    line-height: 1.35;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    border: none;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    font-weight: 800;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #33f3ff, #1d4ed8);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.8), 0 0 10px #ffffff;
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    background: rgba(15, 23, 42, 0.6);
+    color: #00f0ff;
+    border: 1px solid rgba(0, 240, 255, 0.5);
+    box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.btn-outline:hover {
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.3);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* --- 5. GAME TABS & FILTERS --- */
+.game-tabs-container {
+    background: #090e1a;
+    padding: 18px 0;
+    border-bottom: 2px solid rgba(0, 240, 255, 0.15);
+    overflow-x: auto;
+}
+
+.game-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 20px;
+}
+
+.tab-btn {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #94a3b8;
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    border-color: #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* --- 6. SECTIONS & GAMING CARDS --- */
+.section {
+    padding: 80px 8%;
+    position: relative;
+}
+
+.bg-darker {
+    background: #03050a;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.section-title p {
+    color: #94a3b8;
+    font-size: 1.05rem;
+}
+
+/* Hiệu ứng chung cho các Card (News, Player, Wiki, Download) */
+.news-card, .player-card, .wiki-card, .download-card {
+    background: rgba(11, 18, 33, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.news-card::before, .player-card::before, .wiki-card::before, .download-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.news-card:hover, .player-card:hover, .wiki-card:hover, .download-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: #00f0ff;
+    box-shadow: 0 15px 35px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+.news-card:hover::before, .player-card:hover::before, .wiki-card:hover::before, .download-card:hover::before {
+    opacity: 1;
+}
+
+/* News Grid */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.news-img {
+    height: 190px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+}
+
+.game-tag {
+    background: #2563eb;
+    color: white;
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+
+.game-tag.valorant { background: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+.game-tag.cs2 { background: #f59e0b; box-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
+
+.news-info {
+    padding: 22px;
+}
+
+.news-info .date {
+    font-size: 0.8rem;
+    color: #00f0ff;
+    font-weight: 600;
+}
+
+.news-info h3 {
+    font-size: 1.15rem;
+    margin: 10px 0;
+    color: #f8fafc;
+}
+
+.news-info p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 18px;
+}
+
+.read-more {
+    color: #00f0ff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+    transition: 0.3s;
+}
+
+.read-more:hover {
+    color: #fff;
+    text-shadow: 0 0 12px #00f0ff;
+}
+
+/* Tournaments */
+.tournament-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.tournament-item {
+    background: rgba(11, 18, 33, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 20px 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    transition: 0.3s;
+}
+
+.tournament-item:hover {
+    border-color: #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.t-game {
+    font-weight: 800;
+    color: #00f0ff;
+    width: 180px;
+    text-transform: uppercase;
+}
+
+.t-match {
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex: 1;
+    color: #fff;
+}
+
+.t-time {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.t-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.t-status.live {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+    animation: pulseLive 1.5s infinite;
+}
+
+@keyframes pulseLive {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.t-status.upcoming {
+    background: rgba(0, 240, 255, 0.15);
+    color: #00f0ff;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+/* Roster Grid */
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.player-card {
+    padding: 30px;
+    text-align: center;
+}
+
+.player-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    border: 2px solid #00f0ff;
+    background: #1e293b;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    transition: 0.4s;
+}
+
+.player-card:hover .player-avatar {
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+    border-color: #fff;
+}
+
+.player-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.player-card h3 {
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.team-name {
+    display: block;
+    color: #00f0ff;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.player-card p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+/* Wiki & Filter Bar */
+.wiki-filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #94a3b8;
+    padding: 9px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: #00f0ff;
+    color: #05070d;
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+}
+
+.wiki-filter-bar input {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 9px 16px;
+    border-radius: 6px;
+    color: #fff;
+    outline: none;
+    width: 260px;
+    transition: 0.3s;
+}
+
+.wiki-filter-bar input:focus {
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.wiki-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.wiki-card {
+    padding: 22px;
+}
+
+.wiki-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    padding-bottom: 10px;
+}
+
+.wiki-header h4 {
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.badge-cat {
+    font-size: 0.7rem;
+    padding: 4px 9px;
+    border-radius: 4px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.badge-cat.moba { background: #8b5cf6; color: white; box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); }
+.badge-cat.fps { background: #10b981; color: white; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+
+.stats-list li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #94a3b8;
+}
+
+.stats-list li strong {
+    color: #f1f5f9;
+}
+
+/* Download Cards */
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.download-card {
+    padding: 30px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.download-card .btn {
+    width: 100%;
+    max-width: 260px;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+}
+
+/* --- 7. NEWSLETTER SECTION --- */
+.newsletter-section {
+    padding: 70px 8%;
+    background: linear-gradient(135deg, #090e1a, #05070d);
+    text-align: center;
+    border-top: 2px solid rgba(0, 240, 255, 0.2);
+    border-bottom: 2px solid rgba(0, 240, 255, 0.2);
+}
+
+.newsletter-box {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-box h3 {
+    font-size: 1.9rem;
+    margin-bottom: 12px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.newsletter-box p {
+    color: hsl(215, 20%, 65%);
+    margin-bottom: 25px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    background: rgba(15, 23, 42, 0.9);
+    color: #fff;
+    outline: none;
+    transition: 0.3s;
+}
+
+.newsletter-form input:focus {
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.success-msg {
+    margin-top: 15px;
+    font-weight: 700;
+    color: #10b981;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* --- 8. FOOTER STYLES --- */
+.footer-section {
+    background-color: #030509;
+    color: #94a3b8;
+    padding-top: 60px;
+    border-top: 1px solid rgba(59, 130, 246, 0.3);
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5% 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr 1.8fr;
+    gap: 40px;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.footer-logo span {
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+}
+
+.company-name {
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+}
+
+.company-info {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    color: #64748b;
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.contact-info i {
+    color: #00f0ff;
+    margin-top: 4px;
+}
+
+.footer-col h3 {
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-left: 3px solid #00f0ff;
+    padding-left: 10px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #00f0ff;
+    transform: translateX(4px);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+.footer-form {
+    display: flex;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.footer-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 15px;
+    color: #fff;
+    outline: none;
+    font-size: 0.85rem;
+}
+
+.footer-form button {
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    border: none;
+    padding: 0 22px;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.footer-form button:hover {
+    box-shadow: 0 0 15px #00f0ff;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 38px;
+    height: 38px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #00f0ff;
+    border-color: #00f0ff;
+    color: #05070d;
+    box-shadow: 0 0 15px #00f0ff;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    background-color: #010204;
+    padding: 25px 5%;
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    text-align: center;
+}
+
+.footer-bottom-content {
+    max-width: 1300px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.bct-seal {
+    display: flex;
+    align-items: center;
+    background: #0f172a;
+    border: 1px solid #00f0ff;
+    border-radius: 6px;
+    padding: 6px 15px;
+    gap: 10px;
+    font-size: 0.75rem;
+    text-align: left;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.seal-badge {
+    background: #00f0ff;
+    color: #05070d;
+    font-weight: 900;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pay-badge {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* Floating Actions */
+.floating-actions {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.float-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    transition: 0.3s;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.float-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+.scroll-top {
+    background: #1e293b;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+}
+
+.phone-btn {
+    background: #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+.zalo-btn {
+    background: #0068ff;
+    box-shadow: 0 0 15px rgba(0, 104, 255, 0.6);
+    font-size: 0.75rem;
+}
+
+/* --- 9. DROPDOWN MENU GAMING --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -60px;
+    background: rgba(5, 7, 13, 0.96);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.2);
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    border-radius: 10px;
+    min-width: 440px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    backdrop-filter: blur(15px);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-column {
+    flex: 1;
+}
+
+.dropdown-column h4 {
+    color: #00f0ff;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+    padding-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+.dropdown-column a {
+    display: block;
+    color: #94a3b8;
+    padding: 6px 0;
+    font-size: 0.85rem;
+    font-weight: normal !important;
+    transition: 0.2s;
+}
+
+.dropdown-column a::after {
+    display: none !important;
+}
+
+.dropdown-column a:hover {
+    color: #00f0ff !important;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+    transform: translateX(6px);
+}
+/* --- 11. RESPONSIVE DESIGN --- */
+@media(max-width: 992px) {
+    .header {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+    }
+    .navbar {
+        display: none;
+    }
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    .hero-content h1 {
+        font-size: 2.3rem;
+    }
+}
+
+@media(max-width: 576px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
+/* Hiệu ứng tương tác cho Logo khi di chuột */
+.logo, .footer-logo {
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo:hover, .footer-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.8));
+}
+/* Căn chỉnh icon và chữ trong các tab Navbar */
+.navbar > a,
+.navbar .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.navbar > a i,
+.navbar .dropdown-toggle i:first-child {
+    font-size: 0.9rem;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.navbar > a:hover i,
+.navbar > a.active i,
+.navbar .dropdown-toggle:hover i:first-child,
+.navbar .dropdown-toggle.active i:first-child {
+    transform: translateY(-1px);
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.8));
+}
+/* ==========================================================
+   MOBILE / HALF-SCREEN SLIDE-OUT DRAWER (KIỂU LEAGUE OF LEGENDS)
+   ========================================================== */
+.mobile-menu-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    color: #f1f5f9;
+    font-size: 1.15rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.mobile-menu-btn:hover {
+    border-color: #00f0ff;
+    color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.45);
+}
+
+/* Lớp phủ tối mờ nền phía sau */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 4, 10, 0.75);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1999;
+}
+
+.mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Bảng ngăn kéo trượt từ cạnh phải */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -340px;
+    width: 310px;
+    max-width: 85vw;
+    height: 100vh;
+    background: #0b0f19;
+    border-left: 1px solid rgba(0, 240, 255, 0.25);
+    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow-y: auto;
+    transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-drawer.open {
+    right: 0;
+}
+
+.drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.drawer-close-btn:hover {
+    color: #00f0ff;
+    border-color: #00f0ff;
+}
+
+.drawer-search {
+    position: relative;
+}
+
+.drawer-search input {
+    width: 100%;
+    background: #131a29;
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    padding: 10px 14px 10px 38px;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.drawer-search input:focus {
+    border-color: #00f0ff;
+}
+
+.drawer-search i {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00f0ff;
+}
+
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.drawer-nav > a,
+.drawer-dropdown-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s;
+}
+
+.drawer-nav > a {
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.drawer-dropdown-btn span {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.drawer-nav > a i,
+.drawer-dropdown-btn i:first-child {
+    color: #00f0ff;
+    width: 18px;
+    text-align: center;
+}
+
+.drawer-nav > a:hover,
+.drawer-dropdown-btn:hover {
+    background: rgba(0, 240, 255, 0.1);
+    color: #00f0ff;
+}
+
+.drawer-nav > a.active {
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    box-shadow: inset 3px 0 0 #00f0ff;
+}
+
+.drawer-dropdown-btn .arrow {
+    font-size: 0.8rem;
+    transition: transform 0.25s ease;
+}
+
+.drawer-dropdown-btn.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* Menu con xổ xuống trong ngăn kéo */
+.drawer-submenu {
+    display: none;
+    flex-direction: column;
+    padding: 6px 0 8px 32px;
+    gap: 6px;
+    border-left: 2px solid rgba(0, 240, 255, 0.25);
+    margin-left: 20px;
+}
+
+.drawer-submenu.open {
+    display: flex;
+}
+
+.drawer-submenu .sub-heading {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #00f0ff;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+.drawer-submenu a {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    padding: 5px 0;
+    transition: 0.2s;
+}
+
+.drawer-submenu a:hover {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+/* Nút Tải Game nổi bật ở cuối ngăn kéo giống LoL */
+.drawer-nav > a.drawer-cta {
+    margin-top: 12px;
+    justify-content: center;
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    font-weight: 800;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+}
+
+.drawer-nav > a.drawer-cta i {
+    color: #05070d;
+}
+
+/* Kích hoạt nút 3 gạch khi màn hình nhỏ hơn 1150px (khi thu nửa màn hình) */
+@media (max-width: 1150px) {
+    .header {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+    }
+    .navbar {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 520px) {
+    .header-right .search-box {
+        display: none; /* Ẩn ô search trên header khi quá hẹp, dùng ô search trong drawer */
+    }
+}
+/* ==========================================================
+   HEADER ACTIONS: GIỎ HÀNG, NGÔN NGỮ & TÀI KHOẢN
+   ========================================================== */
+.header-action-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    color: #00f0ff;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.header-action-btn:hover,
+.header-action-btn.logged-in {
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.14);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.45);
+}
+
+/* Huy hiệu đếm số lượng trên icon Giỏ hàng */
+.cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
+
+/* Dropdown chọn ngôn ngữ */
+.lang-dropdown {
+    position: relative;
+}
+
+.lang-menu {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    min-width: 175px;
+    background: #0b0f19;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1500;
+}
+
+.lang-menu.open {
+    display: flex;
+}
+
+.lang-option {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    padding: 9px 12px;
+    border-radius: 6px;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.lang-option:hover,
+.lang-option.active {
+    background: rgba(0, 240, 255, 0.15);
+    color: #00f0ff;
+}
+
+/* Ngăn kéo Giỏ hàng trượt bên phải */
+.side-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 4, 10, 0.75);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 2100;
+}
+
+.side-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -460px;
+    width: 420px;
+    max-width: 95vw;
+    height: 100vh;
+    background: #0b0f19;
+    border-left: 1px solid rgba(0, 240, 255, 0.3);
+    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.9);
+    z-index: 2101;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.cart-drawer.open {
+    right: 0;
+}
+
+/* Header Tabs */
+.cart-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+}
+
+.cart-nav-tabs {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+}
+
+.cart-tab-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.cart-tab-btn:hover {
+    color: #fff;
+    border-color: rgba(0, 240, 255, 0.4);
+}
+
+.cart-tab-btn.active {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: rgba(0, 240, 255, 0.6);
+    color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.cart-tab-badge {
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 1px 6px;
+    border-radius: 999px;
+    line-height: 1.2;
+}
+
+/* Panes */
+.cart-view-pane {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.cart-view-pane.active {
+    display: flex;
+}
+
+.cart-items-list {
+    flex: 1;
+    overflow-y: auto;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+}
+
+.cart-items-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cart-items-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+}
+
+.empty-cart-msg {
+    color: #64748b;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+.cart-item-row {
+    background: #111827;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-item-info h5 {
+    color: #f8fafc;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.cart-item-info span {
+    color: #00f0ff;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.cart-remove-btn {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.cart-remove-btn:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+.cart-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+    margin-top: auto;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 1rem;
+    color: #e2e8f0;
+}
+
+.cart-total-row strong {
+    color: #00f0ff;
+    font-size: 1.15rem;
+}
+
+/* Checkout Scroll Area */
+.checkout-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 4px 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checkout-scroll-area::-webkit-scrollbar {
+    width: 5px;
+}
+
+.checkout-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+}
+
+.checkout-back-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 0 6px 0;
+    transition: color 0.2s;
+    align-self: flex-start;
+}
+
+.checkout-back-btn:hover {
+    color: #00f0ff;
+}
+
+.checkout-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.checkout-form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.checkout-form-group label i {
+    color: #00f0ff;
+    font-size: 0.82rem;
+}
+
+.checkout-form-group label .req {
+    color: #ef4444;
+}
+
+.checkout-input {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: #f8fafc;
+    font-size: 0.88rem;
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    width: 100%;
+}
+
+.checkout-input:focus {
+    border-color: #00f0ff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+}
+
+.checkout-input.input-error {
+    border-color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.08);
+}
+
+.checkout-textarea {
+    resize: vertical;
+    min-height: 52px;
+}
+
+/* Delivery Card */
+.checkout-delivery-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(0, 240, 255, 0.05));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.delivery-card-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #10b981;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.delivery-estimate-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.delivery-estimate-main {
+    color: #f8fafc;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.delivery-estimate-date {
+    color: #38bdf8;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.delivery-courier-tag {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 6px;
+    margin-top: 2px;
+}
+
+/* Payment Methods */
+.payment-methods-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.payment-method-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.payment-method-card input[type="radio"] {
+    display: none;
+}
+
+.pm-radio-custom {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.payment-method-card.selected .pm-radio-custom {
+    border-color: #00f0ff;
+}
+
+.payment-method-card.selected .pm-radio-custom::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #00f0ff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00f0ff;
+}
+
+.payment-method-card:hover {
+    border-color: rgba(0, 240, 255, 0.4);
+}
+
+.payment-method-card.selected {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
+}
+
+.pm-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pm-title {
+    color: #f8fafc;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pm-title i {
+    color: #00f0ff;
+    font-size: 0.85rem;
+}
+
+.pm-desc {
+    color: #64748b;
+    font-size: 0.75rem;
+}
+
+/* Coupon Box */
+.coupon-action-box {
+    display: flex;
+    gap: 8px;
+}
+
+.coupon-input {
+    flex: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-coupon-apply {
+    background: linear-gradient(135deg, #00f0ff, #0284c7);
+    color: #020617;
+    border: none;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-coupon-apply:hover {
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    filter: brightness(1.1);
+}
+
+.coupon-status-msg {
+    font-size: 0.78rem;
+    font-weight: 500;
+    min-height: 18px;
+    margin-top: 3px;
+}
+
+.coupon-status-msg.success {
+    color: #10b981;
+}
+
+.coupon-status-msg.error {
+    color: #ef4444;
+}
+
+.coupon-chips {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.coupon-chip-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(0, 240, 255, 0.4);
+    color: #00f0ff;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.coupon-chip-btn:hover {
+    background: rgba(0, 240, 255, 0.15);
+    border-style: solid;
+}
+
+/* Order Summary */
+.checkout-summary-card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.summary-line.discount-line {
+    color: #10b981;
+}
+
+.summary-line .free-ship {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.summary-line.total-line {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 8px;
+    font-size: 0.95rem;
+    color: #f8fafc;
+}
+
+.summary-line.total-line strong {
+    color: #00f0ff;
+    font-size: 1.15rem;
+}
+
+/* Error Banner */
+.checkout-error-banner {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-top: 5px;
+}
+
+/* Success Modal inside Drawer */
+.order-success-modal {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 15, 25, 0.97);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.order-success-modal.open {
+    display: flex;
+    animation: fadeInModal 0.28s ease forwards;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.order-success-content {
+    background: #0d1322;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);
+    border-radius: 12px;
+    padding: 22px 18px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.success-glow-icon {
+    font-size: 3.2rem;
+    color: #10b981;
+    filter: drop-shadow(0 0 16px rgba(16, 185, 129, 0.7));
+    animation: bounceIcon 0.6s ease;
+}
+
+@keyframes bounceIcon {
+    0% { transform: scale(0.3); opacity: 0; }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-heading {
+    color: #f8fafc;
+    font-size: 1.22rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.success-subheading {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    margin: 0;
+}
+
+.success-receipt-card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+    margin: 4px 0;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+
+.receipt-row.total-receipt {
+    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    padding-top: 6px;
+    margin-top: 2px;
+    color: #f8fafc;
+    font-weight: 700;
+}
+
+.receipt-row.total-receipt strong {
+    color: #00f0ff;
+    font-size: 1rem;
+}
+
+.receipt-order-id {
+    color: #00f0ff;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.text-truncate {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+}
+
+.auto-close-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.auto-close-text {
+    font-size: 0.78rem;
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.auto-close-bar-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.auto-close-bar-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #00f0ff, #10b981);
+}
+
+/* Global Toast Notification */
+.esports-toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #0d1322;
+    border: 1px solid #00f0ff;
+    color: #f8fafc;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 240, 255, 0.35);
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.esports-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .cart-drawer {
+        width: 100vw;
+        max-width: 100vw;
+        right: -100vw;
+        padding: 15px;
+    }
+    .text-truncate {
+        max-width: 130px;
+    }
+}
+
+/* Modal Đăng Nhập / Tài khoản */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 4, 10, 0.82);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2200;
+    padding: 20px;
+}
+
+.modal-backdrop.open {
+    display: flex;
+}
+
+.account-box {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    background: #0b0f19;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    border-radius: 14px;
+    padding: 30px 26px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 240, 255, 0.2);
+    text-align: center;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.modal-close-btn:hover {
+    color: #00f0ff;
+}
+
+.account-header h3 {
+    color: #fff;
+    margin: 10px 0 6px;
+    font-size: 1.3rem;
+}
+
+.account-header p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.account-form input {
+    background: #131a29;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    padding: 11px 14px;
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.account-form input:focus {
+    border-color: #00f0ff;
+}
+
+.account-switch {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.account-switch a {
+    color: #00f0ff;
+    font-weight: 700;
+}
+/* ==========================================================
+   BẢNG KẾT QUẢ TÌM KIẾM TOÀN TRANG (GLOBAL SEARCH DROPDOWN)
+   ========================================================== */
+.global-search-results {
+    position: fixed;
+    top: 76px;
+    right: 5%;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: rgba(11, 15, 25, 0.98);
+    border: 1px solid rgba(0, 240, 255, 0.45);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 240, 255, 0.2);
+    backdrop-filter: blur(14px);
+    padding: 14px;
+    z-index: 2300;
+    display: none;
+}
+
+.global-search-results.open {
+    display: block;
+    animation: fadeInPage 0.2s ease;
+}
+
+.search-res-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.search-res-header strong {
+    color: #00f0ff;
+}
+
+.search-res-header button {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-res-header button:hover {
+    color: #00f0ff;
+}
+
+.search-res-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-res-item {
+    display: block;
+    padding: 10px 12px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.search-res-item:hover {
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.08);
+    transform: translateX(4px);
+}
+
+.search-res-cat {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #00f0ff;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.search-res-item h4 {
+    color: #f8fafc;
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+}
+
+.search-res-item p {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.search-res-empty {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    text-align: center;
+    padding: 16px 8px;
+}
+/* Cụm nút tăng/giảm số lượng trong Giỏ hàng */
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.cart-qty-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0b0f19;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 6px;
+    padding: 2px 4px;
+}
+
+.cart-qty-btn {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.cart-qty-btn:hover {
+    background: #00f0ff;
+    color: #05070d;
+}
+
+.cart-item-info .cart-qty-val {
+    color: #f8fafc;
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 18px;
+    text-align: center;
+}
+/* ==========================================================
+   TRANG TẠO & QUẢN LÝ TÀI KHOẢN (ACCOUNT.HTML)
+   ========================================================== */
+.account-manager-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.account-panel-card {
+    background: rgba(11, 18, 33, 0.9);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 12px;
+    padding: 26px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.panel-header h3 {
+    color: #fff;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.panel-header h3 i {
+    color: #00f0ff;
+}
+
+.account-create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.account-create-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.account-create-form label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+.account-create-form input,
+.account-create-form select {
+    background: #05070d;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: #fff;
+    font-size: 0.92rem;
+    outline: none;
+}
+
+.account-create-form input:focus,
+.account-create-form select:focus {
+    border-color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.account-feedback-msg {
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-height: 20px;
+}
+
+.active-session-banner {
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.active-session-banner strong {
+    color: #00f0ff;
+}
+
+.saved-accounts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 460px;
+    overflow-y: auto;
+}
+
+.saved-account-item {
+    background: #05070d;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.saved-account-item.is-current {
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.18);
+}
+
+.acc-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.acc-avatar-badge {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    font-weight: 900;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.acc-item-meta h4 {
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.acc-current-tag {
+    font-size: 0.7rem;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.acc-item-meta p {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+.acc-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.acc-btn-mini {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    background: rgba(15, 23, 42, 0.9);
+    color: #00f0ff;
+}
+
+.acc-btn-mini:hover {
+    background: #00f0ff;
+    color: #05070d;
+}
+
+.acc-btn-mini.danger {
+    border-color: rgba(239, 68, 68, 0.45);
+    color: #ef4444;
+}
+
+.acc-btn-mini.danger:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .account-manager-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Khung thông báo "Đã xong" hiển thị trực tiếp trên màn hình */
+.account-feedback-msg.success {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid #10b981;
+    color: #10b981;
+    font-size: 0.92rem;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+}
+/* Chế độ chỉ hiển thị bảng Tạo Tài Khoản khi bấm "Đăng ký ngay" / "Tạo tài khoản ngay" */
+.account-manager-grid.register-only {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.account-manager-grid.register-only .account-panel-card:nth-child(2) {
+    display: none;
+}
+
+/* ==========================================================
+   TRANG GIẢI ĐẤU - VIDEO TRỰC TIẾP (TOURNAMENTS.HTML)
+   ========================================================== */
+.tournament-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.tournament-video-card {
+    background: rgba(11, 18, 33, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.tournament-video-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, #00f0ff, #3b82f6, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.tournament-video-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: #00f0ff;
+    box-shadow: 0 15px 40px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.08);
+}
+
+.tournament-video-card:hover::before {
+    opacity: 1;
+}
+
+/* Video iframe wrapper - giữ tỷ lệ 16:9 */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    background: #000;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Thông tin dưới video */
+.video-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px 0;
+}
+
+.video-game-tag {
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.video-game-tag.lol {
+    background: rgba(37, 99, 235, 0.25);
+    color: #60a5fa;
+    border: 1px solid rgba(37, 99, 235, 0.5);
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+
+.video-game-tag.ff {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+}
+
+.video-game-tag.lq {
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+}
+
+/* Trạng thái video */
+.video-status {
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.video-status.live {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+    animation: pulseLive 1.5s infinite;
+}
+
+.video-status.live i {
+    font-size: 0.5rem;
+    animation: pulseLive 1s infinite;
+}
+
+.video-status.upcoming {
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.video-status.ended {
+    background: rgba(100, 116, 139, 0.15);
+    color: #94a3b8;
+    border: 1px solid rgba(100, 116, 139, 0.35);
+}
+
+/* Tiêu đề & mô tả video */
+.tournament-video-card h3 {
+    font-size: 1.05rem;
+    color: #f8fafc;
+    margin: 10px 18px 8px;
+    line-height: 1.4;
+}
+
+.tournament-video-card p {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    margin: 0 18px 12px;
+    line-height: 1.5;
+}
+
+/* Thông tin meta dưới cùng */
+.video-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 18px 16px;
+    border-top: 1px solid rgba(59, 130, 246, 0.15);
+    margin: 0 0;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.video-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.video-meta i {
+    color: #00f0ff;
+    font-size: 0.75rem;
+}
+
+/* Responsive cho trang giải đấu */
+@media (max-width: 768px) {
+    .tournament-video-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   WIKI NÂNG CẤP - TABS CON LIÊN QUÂN, LIÊN MINH, FREE FIRE
+   ========================================================== */
+.wiki-controls-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Thanh Tabs chính (chọn Game) */
+.wiki-game-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.wiki-game-tabs .tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+/* Thanh Tabs phụ (Tướng / Nhân Vật / Trang Bị / Vũ Khí) */
+.wiki-subtabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sub-tab-btn {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #94a3b8;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s ease;
+}
+
+.sub-tab-btn:hover {
+    border-color: #00f0ff;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+}
+
+.sub-tab-btn.active {
+    background: rgba(0, 240, 255, 0.15);
+    color: #00f0ff;
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+/* Thanh tìm kiếm và bộ đếm kết quả */
+.wiki-search-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: rgba(11, 18, 33, 0.65);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    padding: 12px 20px;
+    border-radius: 12px;
+}
+
+.wiki-search-box {
+    position: relative;
+    flex: 1;
+    min-width: 260px;
+}
+
+.wiki-search-box i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00f0ff;
+    font-size: 0.9rem;
+}
+
+.wiki-search-box input {
+    width: 100%;
+    background: #05070d;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    border-radius: 8px;
+    padding: 10px 14px 10px 38px;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.wiki-search-box input:focus {
+    border-color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+.wiki-count-badge {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.wiki-count-badge strong {
+    color: #00f0ff;
+    font-size: 1rem;
+}
+
+/* Badges cho từng Game trong Wiki */
+.badge-cat.lol {
+    background: rgba(37, 99, 235, 0.25);
+    color: #60a5fa;
+    border: 1px solid rgba(37, 99, 235, 0.5);
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+
+.badge-cat.lq {
+    background: rgba(139, 92, 246, 0.25);
+    color: #c084fc;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+}
+
+.badge-cat.ff {
+    background: rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+}
+
+/* Badge phân loại (Tướng / Nhân Vật / Trang Bị / Vũ Khí) */
+.badge-type {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-type.champ {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.badge-type.item {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.45);
+}
+
+.badge-type.weapon {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+}
+
+/* Thẻ Wiki chi tiết */
+.wiki-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px;
+}
+
+.wiki-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.wiki-card-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #00f0ff;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+}
+
+.wiki-card.game-lol .wiki-card-avatar { border-color: #3b82f6; color: #60a5fa; box-shadow: 0 0 10px rgba(59, 130, 246, 0.25); }
+.wiki-card.game-lq .wiki-card-avatar { border-color: #8b5cf6; color: #c084fc; box-shadow: 0 0 10px rgba(139, 92, 246, 0.25); }
+.wiki-card.game-ff .wiki-card-avatar { border-color: #f59e0b; color: #fbbf24; box-shadow: 0 0 10px rgba(245, 158, 11, 0.25); }
+
+.wiki-title-group {
+    flex: 1;
+}
+
+.wiki-title-group h4 {
+    font-size: 1.12rem;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.wiki-subtitle {
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+.wiki-card-badges {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+/* Khung hiển thị Kỹ năng / Nội tại đặc biệt */
+.wiki-passive-box {
+    background: rgba(5, 7, 13, 0.75);
+    border-left: 3px solid #00f0ff;
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: #cbd5e1;
+}
+
+.wiki-card.game-lol .wiki-passive-box { border-left-color: #3b82f6; }
+.wiki-card.game-lq .wiki-passive-box { border-left-color: #8b5cf6; }
+.wiki-card.game-ff .wiki-passive-box { border-left-color: #f59e0b; }
+
+.wiki-passive-box strong {
+    color: #f1f5f9;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.84rem;
+}
+
+/* Trạng thái không tìm thấy */
+.wiki-empty-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px 20px;
+    color: #94a3b8;
+    background: rgba(11, 18, 33, 0.6);
+    border: 1px dashed rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+}
+
+.wiki-empty-msg i {
+    font-size: 2.5rem;
+    color: #ef4444;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.wiki-empty-msg h3 {
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+}
+
+/* ==========================================================
+   CỬA SỔ CHI TIẾT TƯỚNG PHONG CÁCH LEAGUE OF LEGENDS (CHAMPION SPOTLIGHT MODAL)
+   ========================================================== */
+.wiki-card.clickable {
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wiki-card.clickable:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+.wiki-card.clickable.game-lol:hover { border-color: #3b82f6; box-shadow: 0 15px 35px rgba(59, 130, 246, 0.35); }
+.wiki-card.clickable.game-lq:hover { border-color: #a855f7; box-shadow: 0 15px 35px rgba(168, 85, 247, 0.35); }
+.wiki-card.clickable.game-ff:hover { border-color: #f59e0b; box-shadow: 0 15px 35px rgba(245, 158, 11, 0.35); }
+
+/* Khung ảnh đại diện thẻ */
+.wiki-card-banner {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    background: #020408;
+    overflow: hidden;
+}
+
+.wiki-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wiki-card.clickable:hover .wiki-card-img {
+    transform: scale(1.08);
+}
+
+.wiki-card-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 7, 13, 0) 30%, rgba(11, 18, 33, 0.95) 100%);
+    pointer-events: none;
+}
+
+.wiki-card-overlay-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(5, 7, 13, 0.85);
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.25s ease;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.wiki-card.clickable:hover .wiki-card-overlay-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Phần nội dung trong thẻ */
+.wiki-card-inner {
+    padding: 18px 20px 20px;
+}
+
+.wiki-card-footer-action {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #00f0ff;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.wiki-card-footer-action i {
+    transition: transform 0.25s ease;
+}
+
+.wiki-card.clickable:hover .wiki-card-footer-action i {
+    transform: translateX(4px);
+}
+
+/* ================== MODAL LỚP PHỦ & CỬA SỔ SPOTLIGHT ================== */
+.wiki-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 6, 15, 0.88);
+    backdrop-filter: blur(10px);
+    z-index: 2500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wiki-modal-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+
+.wiki-detail-modal {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    max-height: 92vh;
+    overflow-y: auto;
+    background: #0b0f19;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.25);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wiki-modal-overlay.open .wiki-detail-modal {
+    transform: scale(1);
+}
+
+/* Nút đóng modal */
+.wiki-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(11, 15, 25, 0.85);
+    border: 1px solid rgba(0, 240, 255, 0.45);
+    color: #e2e8f0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.wiki-modal-close:hover {
+    background: #00f0ff;
+    color: #05070d;
+    box-shadow: 0 0 15px #00f0ff;
+    transform: rotate(90deg);
+}
+
+/* Header Banner điện ảnh của Modal */
+.wiki-modal-hero {
+    position: relative;
+    height: 280px;
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(0, 240, 255, 0.3);
+}
+
+.wiki-modal-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 25%;
+    filter: brightness(0.75);
+    transform: scale(1.02);
+    transition: transform 0.5s ease;
+}
+
+.wiki-modal-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11, 15, 25, 0.1) 0%, rgba(11, 15, 25, 0.7) 60%, #0b0f19 100%);
+    pointer-events: none;
+}
+
+.wiki-modal-hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 650px;
+}
+
+.wiki-modal-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.wiki-modal-hero-content h2 {
+    font-size: 2.4rem;
+    color: #ffffff;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.6), 0 4px 15px rgba(0, 0, 0, 0.9);
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.wiki-modal-subtitle {
+    font-size: 1.05rem;
+    color: #00f0ff;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.wiki-modal-role {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+/* Thân nội dung Modal */
+.wiki-modal-body {
+    padding: 28px 32px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.wiki-modal-section {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 12px;
+    padding: 20px 24px;
+}
+
+.wiki-modal-section h3 {
+    font-size: 1.1rem;
+    color: #00f0ff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    padding-bottom: 8px;
+}
+
+.wiki-modal-lore-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+}
+
+/* Thanh đo chỉ số năng lực chiến đấu */
+.wiki-stats-bars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 28px;
+}
+
+.stat-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stat-bar-label {
+    width: 105px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-bar-track {
+    flex: 1;
+    height: 9px;
+    background: #05070d;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00f0ff, #2563eb);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    border-radius: 6px;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-bar-val {
+    width: 40px;
+    text-align: right;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #00f0ff;
+}
+
+/* Danh sách chiêu thức (Abilities) */
+.wiki-abilities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.wiki-ability-card {
+    background: rgba(11, 15, 25, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+}
+
+.wiki-ability-card:hover {
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.05);
+    transform: translateX(4px);
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.15);
+}
+
+.ability-key-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    font-weight: 900;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.ability-details h5 {
+    color: #f8fafc;
+    font-size: 0.98rem;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ability-details p {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+/* Mẹo chơi & Lối chơi cao thủ */
+.wiki-modal-tips-box {
+    border-left: 4px solid #00f0ff;
+    background: rgba(0, 240, 255, 0.05);
+}
+
+.wiki-modal-tips-box p {
+    font-size: 0.92rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .wiki-stats-bars-grid {
+        grid-template-columns: 1fr;
+    }
+    .wiki-modal-hero {
+        height: 230px;
+        padding: 20px;
+    }
+    .wiki-modal-hero-content h2 {
+        font-size: 1.8rem;
+    }
+    .wiki-modal-body {
+        padding: 20px;
+    }
+}
+
+/* ==========================================================
+   LIÊN KẾT NGUỒN CHÍNH THỨC GARENA (LIÊN QUÂN, FREE FIRE) & RIOT
+   ========================================================== */
+.wiki-official-sources-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: -6px;
+    margin-bottom: 10px;
+}
+
+.official-source-pill {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #cbd5e1;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.official-source-pill:hover {
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.official-source-pill.lol:hover { border-color: #3b82f6; box-shadow: 0 0 14px rgba(59, 130, 246, 0.5); color: #60a5fa; }
+.official-source-pill.lq:hover { border-color: #a855f7; box-shadow: 0 0 14px rgba(168, 85, 247, 0.5); color: #c084fc; }
+.official-source-pill.ff:hover { border-color: #f59e0b; box-shadow: 0 0 14px rgba(245, 158, 11, 0.5); color: #fbbf24; }
+
+.official-source-pill i:last-child {
+    font-size: 0.72rem;
+    opacity: 0.75;
+}
+
+/* Nút liên kết chính thức trong Spotlight Modal */
+.wiki-modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.wiki-modal-official-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.wiki-modal-official-btn.lol {
+    background: rgba(37, 99, 235, 0.18);
+    border: 1px solid rgba(37, 99, 235, 0.55);
+    color: #60a5fa;
+}
+.wiki-modal-official-btn.lol:hover {
+    background: #2563eb;
+    color: #fff;
+    box-shadow: 0 0 18px rgba(37, 99, 235, 0.6);
+}
+
+.wiki-modal-official-btn.lq {
+    background: rgba(139, 92, 246, 0.18);
+    border: 1px solid rgba(139, 92, 246, 0.55);
+    color: #c084fc;
+}
+.wiki-modal-official-btn.lq:hover {
+    background: #8b5cf6;
+    color: #fff;
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.6);
+}
+
+.wiki-modal-official-btn.ff {
+    background: rgba(245, 158, 11, 0.18);
+    border: 1px solid rgba(245, 158, 11, 0.55);
+    color: #fbbf24;
+}
+.wiki-modal-official-btn.ff:hover {
+    background: #d97706;
+    color: #fff;
+    box-shadow: 0 0 18px rgba(245, 158, 11, 0.6);
+}
+
+/* ==========================================================================
+   WIKI BREADCRUMB & ROLE TABS (HỌC VIỆN LIÊN QUÂN STYLE)
+   ========================================================================== */
+.wiki-breadcrumb-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 30px;
+    padding: 10px 24px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(10px);
+}
+
+.breadcrumb-trail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.breadcrumb-link {
+    color: #94a3b8;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+    color: #00f0ff;
+}
+
+.breadcrumb-separator {
+    font-size: 0.7rem;
+    color: #475569;
+}
+
+.breadcrumb-item {
+    color: #cbd5e1;
+}
+
+.breadcrumb-item.active {
+    color: #00f0ff;
+    font-weight: 800;
+}
+
+/* Tab Vai Trò theo chuẩn Học Viện Liên Quân */
+.wiki-role-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    margin-top: 4px;
+    border-top: 1px dashed rgba(59, 130, 246, 0.25);
+    border-bottom: 1px dashed rgba(59, 130, 246, 0.25);
+}
+
+.role-tab-btn {
+    background: rgba(11, 18, 33, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    color: #cbd5e1;
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.25s ease;
+}
+
+.role-tab-btn:hover {
+    color: #fff;
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.role-tab-btn.active {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(59, 130, 246, 0.25) 100%);
+    border-color: #00f0ff;
+    color: #00f0ff;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+}
+
+/* Thẻ Trang Bị & Vũ Khí thu nhỏ gọn gàng */
+.wiki-card.item-compact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 22px 16px 18px !important;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(10, 15, 29, 0.98) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 250px;
+    justify-content: space-between;
+}
+
+.wiki-card.item-compact:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(0, 240, 255, 0.25);
+    border-color: #00f0ff;
+}
+
+.wiki-card.item-compact.game-lol:hover { border-color: #3b82f6; box-shadow: 0 14px 30px rgba(59, 130, 246, 0.35); }
+.wiki-card.item-compact.game-lq:hover { border-color: #a855f7; box-shadow: 0 14px 30px rgba(168, 85, 247, 0.35); }
+.wiki-card.item-compact.game-ff:hover { border-color: #f59e0b; box-shadow: 0 14px 30px rgba(245, 158, 11, 0.35); }
+
+.item-compact-badge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.game-lol .item-compact-badge { background: rgba(59, 130, 246, 0.25); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.5); }
+.game-lq .item-compact-badge { background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.5); }
+.game-ff .item-compact-badge { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.5); }
+
+.item-compact-icon-wrap {
+    width: 82px;
+    height: 82px;
+    border-radius: 16px;
+    background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.9) 0%, rgba(11, 18, 33, 0.98) 100%);
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    transition: all 0.35s ease;
+}
+
+.game-lol .item-compact-icon-wrap { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+.game-lq .item-compact-icon-wrap { border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+.game-ff .item-compact-icon-wrap { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+
+.wiki-card.item-compact:hover .item-compact-icon-wrap {
+    transform: scale(1.12);
+}
+.game-lol:hover .item-compact-icon-wrap { box-shadow: 0 0 25px rgba(59, 130, 246, 0.6); border-color: #60a5fa; }
+.game-lq:hover .item-compact-icon-wrap { box-shadow: 0 0 25px rgba(168, 85, 247, 0.6); border-color: #c084fc; }
+.game-ff:hover .item-compact-icon-wrap { box-shadow: 0 0 25px rgba(245, 158, 11, 0.6); border-color: #fbbf24; }
+
+.item-compact-img {
+    width: 62px;
+    height: 62px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+    transition: transform 0.3s ease;
+}
+
+.item-compact-info {
+    width: 100%;
+}
+
+.item-compact-info h4 {
+    font-size: 1.05rem;
+    color: #ffffff;
+    font-weight: 800;
+    margin-bottom: 2px;
+    line-height: 1.25;
+}
+
+.item-compact-sub {
+    display: block;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.item-compact-tags {
+    margin-bottom: 12px;
+}
+
+.item-compact-tags .mini-tag {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.item-compact-action {
+    font-size: 0.76rem;
+    color: #00f0ff;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    background: rgba(0, 240, 255, 0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    transition: all 0.25s ease;
+}
+
+.wiki-card.item-compact:hover .item-compact-action {
+    background: #00f0ff;
+    color: #05070d;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+/* ==========================================================
+   THẺ WIKI THU GỌN KIỂU LIÊN MINH HUYỀN THOẠI (HOVER XEM CHI TIẾT)
+   ========================================================== */
+#wikiContainer.wiki-grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.wiki-card.lol-compact-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    border-radius: 6px;
+    background: #0b1426;
+    border: 1px solid rgba(0, 240, 255, 0.22);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Ẩn toàn bộ phần thông số dài dòng bên ngoài (vẫn giữ dữ liệu ngầm để tìm kiếm & mở chi tiết) */
+.wiki-card.lol-compact-card > :not(.wiki-compact-media):not(.wiki-compact-namebar) {
+    display: none !important;
+}
+
+/* Khung ảnh dọc phía trên */
+.wiki-compact-media {
+    position: relative;
+    width: 100%;
+    height: 295px;
+    overflow: hidden;
+    background: #070c18;
+}
+
+.wiki-compact-media > :not(img):not(.wiki-hover-detail-btn):not(.wiki-compact-placeholder) {
+    display: none !important;
+}
+
+.wiki-compact-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.wiki-compact-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #00f0ff;
+    font-size: 3rem;
+}
+
+/* Nút "Xem Chi Tiết" ẩn mặc định */
+.wiki-hover-detail-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px 18px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #00f0ff, #2563eb);
+    color: #05070d;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+    box-shadow: 0 0 22px rgba(0, 240, 255, 0.75);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.25s ease;
+    z-index: 3;
+}
+
+/* Hiệu ứng khi di chuột vào thẻ: tối nhẹ ảnh, phóng to nhẹ và hiện nút Xem Chi Tiết */
+.wiki-card.lol-compact-card:hover {
+    border-color: #00f0ff;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 240, 255, 0.28);
+}
+
+.wiki-card.lol-compact-card:hover .wiki-compact-media img {
+    transform: scale(1.07);
+    filter: brightness(0.5);
+}
+
+.wiki-card.lol-compact-card:hover .wiki-hover-detail-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+/* Thanh tên tướng/nhân vật gọn ở đáy thẻ */
+.wiki-compact-namebar {
+    background: #0b1426;
+    color: #f8fafc;
+    padding: 14px 16px;
+    font-size: 1rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-top: 1px solid rgba(0, 240, 255, 0.18);
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.wiki-card.lol-compact-card:hover .wiki-compact-namebar {
+    background: #10213e;
+    color: #00f0ff;
+}
+/* ==========================================================
+   WIKI: CHIA TAB TƯỚNG & LƯỚI TRANG BỊ Ô NHỎ + HOVER TOOLTIP
+   ========================================================== */
+.dropdown-menu.wiki-dropdown-menu {
+    min-width: 480px;
+    left: -80px;
+}
+
+.wiki-main-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.wiki-tab-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.wiki-group-label {
+    color: #00f0ff;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-right: 4px;
+}
+
+.item-sub-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.sub-filter-btn {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: #94a3b8;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.sub-filter-btn:hover,
+.sub-filter-btn.active {
+    background: rgba(0, 240, 255, 0.16);
+    border-color: #00f0ff;
+    color: #00f0ff;
+}
+
+/* Khi đang ở tab Trang Bị -> chuyển lưới sang dạng các ô biểu tượng nhỏ */
+#wikiContainer.item-grid-mode {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    gap: 22px 16px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.wiki-item-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    overflow: visible !important; /* Bắt buộc để hộp thông số nổi không bị cắt */
+}
+
+.item-icon-box {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    background: radial-gradient(circle at 30% 30%, #1e293b, #090e1a);
+    border: 2px solid var(--item-color, #00f0ff);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.75), inset 0 0 12px rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.85rem;
+    color: var(--item-color, #00f0ff);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wiki-item-tile:hover .item-icon-box {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px var(--item-color, #00f0ff);
+}
+
+.item-tile-name {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    line-height: 1.3;
+    max-width: 100px;
+}
+
+.wiki-item-tile:hover .item-tile-name {
+    color: #00f0ff;
+}
+
+/* Bảng giá tiền & thông số nổi lên khi di chuột vào trang bị */
+.item-hover-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 290px;
+    background: #0d1526;
+    border: 1px solid #00f0ff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.92), 0 0 20px rgba(0, 240, 255, 0.25);
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 1600;
+}
+
+/* Mũi tên nhỏ trỏ xuống icon trang bị */
+.item-hover-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 7px;
+    border-style: solid;
+    border-color: #00f0ff transparent transparent transparent;
+}
+
+.wiki-item-tile:hover .item-hover-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.item-hover-tooltip h5 {
+    color: #00f0ff;
+    font-size: 1rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.item-gold-price {
+    text-align: center;
+    color: #fbbf24;
+    font-weight: 800;
+    font-size: 0.92rem;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.item-stat-line {
+    color: #38bdf8;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-bottom: 6px;
+}
+
+.item-passive-line {
+    color: #cbd5e1;
+    font-size: 0.79rem;
+    line-height: 1.45;
+    margin-top: 5px;
+}
+
+/* ==========================================================
+   USER PROFILE DROPDOWN (HEADER) & RIOT GAMES ACCOUNT PORTAL
+   ========================================================== */
+.user-menu-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.header-user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00f0ff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.user-profile-dropdown {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    min-width: 290px;
+    background: #0a0f1d;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.92), 0 0 25px rgba(0, 240, 255, 0.18);
+    display: none;
+    flex-direction: column;
+    z-index: 2500;
+    overflow: hidden;
+    animation: fadeInDropdown 0.2s ease;
+}
+
+.user-profile-dropdown.open {
+    display: flex;
+}
+
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.up-header {
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(37, 99, 235, 0.12));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.up-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00f0ff;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.up-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.up-name {
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.up-email {
+    color: #94a3b8;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.up-wallet-bar {
+    padding: 12px 16px;
+    background: rgba(16, 185, 129, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.up-wallet-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.up-wallet-label {
+    color: #94a3b8;
+    font-size: 0.78rem;
+}
+
+.up-wallet-val {
+    color: #10b981;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.up-wallet-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #020617;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.up-wallet-btn:hover {
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+    filter: brightness(1.1);
+}
+
+.up-links {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.up-links a,
+.up-logout-btn {
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-size: 0.86rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.up-links a:hover {
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+}
+
+.up-logout-btn {
+    color: #ef4444;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 4px;
+    padding-top: 12px;
+}
+
+.up-logout-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+}
+
+/* RIOT GAMES DASHBOARD STYLING (ACCOUNT.HTML) */
+.riot-portal-wrapper {
+    max-width: 1240px;
+    margin: 120px auto 70px auto;
+    padding: 0 20px;
+}
+
+.riot-hero-card {
+    background: linear-gradient(135deg, #0b1120 0%, #0a0f1d 100%);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 16px;
+    padding: 24px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.12);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.riot-hero-left {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.riot-avatar-frame {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    position: relative;
+    border: 3px solid #00f0ff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+    flex-shrink: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.riot-avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.riot-avatar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: #00f0ff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    gap: 3px;
+}
+
+.riot-avatar-frame:hover .riot-avatar-overlay {
+    opacity: 1;
+}
+
+.riot-hero-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.riot-id-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.riot-verified-badge {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid #10b981;
+    color: #10b981;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+}
+
+.riot-user-email {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    margin: 0;
+}
+
+.riot-wallet-widget {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(0, 240, 255, 0.08));
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.riot-wallet-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.riot-wallet-amount {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #10b981;
+}
+
+.riot-wallet-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-topup-quick {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #020617;
+    font-weight: 800;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-topup-quick:hover {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+    filter: brightness(1.1);
+}
+
+.btn-charity-quick {
+    background: linear-gradient(135deg, #ec4899, #be185d);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-charity-quick:hover {
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+    filter: brightness(1.1);
+}
+
+/* RIOT MAIN DASHBOARD GRID */
+.riot-main-grid {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: 28px;
+    align-items: flex-start;
+}
+
+.riot-nav-sidebar {
+    background: #0b1120;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: sticky;
+    top: 90px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.riot-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    width: 100%;
+}
+
+.riot-tab-btn i {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+    color: #64748b;
+    transition: color 0.2s;
+}
+
+.riot-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f8fafc;
+}
+
+.riot-tab-btn:hover i {
+    color: #00f0ff;
+}
+
+.riot-tab-btn.active {
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    border-left: 4px solid #00f0ff;
+    font-weight: 700;
+}
+
+.riot-tab-btn.active i {
+    color: #00f0ff;
+}
+
+.riot-tab-btn.logout-tab {
+    color: #ef4444;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 10px;
+    padding-top: 14px;
+}
+
+.riot-tab-btn.logout-tab i {
+    color: #ef4444;
+}
+
+.riot-tab-btn.logout-tab:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+}
+
+/* RIOT TAB PANELS */
+.riot-panel {
+    display: none;
+    flex-direction: column;
+    gap: 22px;
+    animation: fadeInModal 0.25s ease forwards;
+}
+
+.riot-panel.active {
+    display: flex;
+}
+
+.riot-card {
+    background: #0b1120;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.riot-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 14px;
+}
+
+.riot-card-header h3 {
+    font-size: 1.18rem;
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.riot-card-header h3 i {
+    color: #00f0ff;
+}
+
+.riot-desc-text {
+    color: #94a3b8;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+/* AVATAR GALLERY & CUSTOM UPLOAD */
+.avatar-preview-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.current-avatar-circle {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 2px solid #00f0ff;
+    object-fit: cover;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.avatar-upload-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-upload-file {
+    background: rgba(0, 240, 255, 0.15);
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+}
+
+.btn-upload-file:hover {
+    background: #00f0ff;
+    color: #020617;
+}
+
+.preset-avatars-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin-bottom: 12px;
+}
+
+.avatar-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.avatar-choice-item {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    background: #111827;
+}
+
+.avatar-choice-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-choice-item:hover {
+    border-color: rgba(0, 240, 255, 0.6);
+    transform: scale(1.06);
+}
+
+.avatar-choice-item.selected {
+    border-color: #00f0ff;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.8);
+    transform: scale(1.08);
+}
+
+.avatar-choice-item.selected::after {
+    content: '✓';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: #00f0ff;
+    color: #020617;
+    font-weight: 800;
+    font-size: 0.65rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TOPUP WALLET PANE */
+.wallet-hero-banner {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(0, 240, 255, 0.1));
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 14px;
+    padding: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.wallet-hero-val {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #10b981;
+    margin: 4px 0 0 0;
+}
+
+.topup-chips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.topup-chip-btn {
+    padding: 12px 10px;
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.topup-chip-btn .chip-bonus {
+    font-size: 0.72rem;
+    color: #10b981;
+    font-weight: 700;
+}
+
+.topup-chip-btn:hover {
+    border-color: rgba(0, 240, 255, 0.4);
+}
+
+.topup-chip-btn.selected {
+    border-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.1);
+    color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+/* CHARITY DONATION PANE */
+.charity-lead-banner {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(168, 85, 247, 0.15));
+    border: 1px solid rgba(236, 72, 153, 0.4);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.charity-lead-banner i {
+    font-size: 2.5rem;
+    color: #ec4899;
+}
+
+.charity-lead-info h4 {
+    color: #f8fafc;
+    font-size: 1.15rem;
+    margin: 0 0 4px 0;
+}
+
+.charity-lead-info p {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.charity-campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.charity-card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.charity-card:hover {
+    border-color: rgba(236, 72, 153, 0.5);
+    transform: translateY(-2px);
+}
+
+.charity-card.selected {
+    border-color: #ec4899;
+    background: rgba(236, 72, 153, 0.08);
+    box-shadow: 0 0 18px rgba(236, 72, 153, 0.3);
+}
+
+.charity-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.charity-card-header i {
+    font-size: 1.3rem;
+    color: #ec4899;
+}
+
+.charity-card-header h4 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 0.95rem;
+}
+
+.charity-card p {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin: 0;
+    flex: 1;
+}
+
+.charity-progress-bar {
+    width: 100%;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.charity-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ec4899, #f43f5e);
+    border-radius: 4px;
+}
+
+.charity-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #cbd5e1;
+}
+
+.donor-honors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.donor-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #111827;
+    border-radius: 8px;
+    border-left: 3px solid #f59e0b;
+    gap: 12px;
+}
+
+.donor-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.donor-star {
+    color: #f59e0b;
+    font-size: 1.1rem;
+}
+
+.donor-name {
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 0.88rem;
+}
+
+.donor-msg {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.donor-amount {
+    color: #10b981;
+    font-weight: 800;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+/* VIETQR TOPUP MODAL */
+.topup-qr-box {
+    background: #0d1322;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 45px rgba(0, 240, 255, 0.25);
+    border-radius: 14px;
+    padding: 26px;
+    max-width: 440px;
+    width: 92vw;
+    position: relative;
+    text-align: center;
+}
+
+.qr-image-wrap {
+    width: 200px;
+    height: 200px;
+    margin: 16px auto;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.qr-payment-info {
+    background: #111827;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.qr-info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.qr-info-row strong {
+    color: #f8fafc;
+}
+
+/* TRANSACTION TABLE */
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+}
+
+.transaction-table th {
+    text-align: left;
+    padding: 12px 14px;
+    background: #111827;
+    color: #94a3b8;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transaction-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+}
+
+.tx-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.74rem;
+    font-weight: 700;
+}
+
+.tx-badge.topup { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.tx-badge.shop { background: rgba(0, 240, 255, 0.15); color: #00f0ff; }
+.tx-badge.charity { background: rgba(236, 72, 153, 0.15); color: #ec4899; }
+
+@media (max-width: 900px) {
+    .riot-portal-wrapper {
+        margin: 100px auto 50px auto;
+        padding: 0 16px;
+    }
+    .riot-main-grid {
+        grid-template-columns: 1fr;
+    }
+    .riot-nav-sidebar {
+        position: static;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .riot-tab-btn {
+        width: auto;
+    }
+    .riot-hero-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* ====================== TOURNAMENT SCHEDULE - DYNAMIC ====================== */
+
+/* Valorant & FC Online Game Tags */
+.video-game-tag.valorant {
+    background: rgba(255, 70, 85, 0.2);
+    color: #ff4655;
+    border: 1px solid rgba(255, 70, 85, 0.5);
+}
+
+.video-game-tag.fco {
+    background: rgba(0, 150, 57, 0.2);
+    color: #00c853;
+    border: 1px solid rgba(0, 200, 83, 0.5);
+}
+
+/* Schedule Game Filter Bar */
+.schedule-game-filter {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 0 20px 25px;
+}
+
+.sgf-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    padding: 8px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sgf-btn:hover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: rgba(0, 240, 255, 0.4);
+    color: #f8fafc;
+}
+
+.sgf-btn.active {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 150, 255, 0.15));
+    border-color: #00f0ff;
+    color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+/* Dynamic Schedule Container */
+.dynamic-schedule-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Schedule Game Group */
+.schedule-game-group {
+    margin-bottom: 30px;
+}
+
+.schedule-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(0, 100, 200, 0.05));
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+}
+
+.schedule-group-header .sgh-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.schedule-group-header .sgh-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.sgh-icon.lol { background: linear-gradient(135deg, #c89b3c, #785a28); }
+.sgh-icon.ff { background: linear-gradient(135deg, #ff6b35, #d4380d); }
+.sgh-icon.lq { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.sgh-icon.valorant { background: linear-gradient(135deg, #ff4655, #bd3944); }
+.sgh-icon.fco { background: linear-gradient(135deg, #00c853, #009624); }
+
+.schedule-group-header .sgh-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.schedule-group-header .sgh-subtitle {
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+.schedule-group-header .sgh-link {
+    color: #00f0ff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.schedule-group-header .sgh-link:hover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: #00f0ff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* Schedule Match Items */
+.schedule-match-list {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+}
+
+.schedule-match-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background: rgba(17, 24, 39, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.3s ease;
+}
+
+.schedule-match-item:last-child {
+    border-bottom: none;
+}
+
+.schedule-match-item:hover {
+    background: rgba(0, 240, 255, 0.04);
+}
+
+.schedule-match-item.is-today {
+    border-left: 3px solid #00f0ff;
+}
+
+.schedule-match-item.is-live {
+    border-left: 3px solid #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.smi-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.smi-tournament {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.smi-teams {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.smi-time-col {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.smi-time {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    font-family: 'Segoe UI', monospace;
+}
+
+.smi-date {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.smi-status {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.smi-status.live {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    animation: pulse-live 1.5s infinite;
+}
+
+.smi-status.today {
+    background: rgba(0, 240, 255, 0.12);
+    color: #00f0ff;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.smi-status.upcoming {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.smi-status.finished {
+    background: rgba(100, 116, 139, 0.12);
+    color: #64748b;
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+@keyframes pulse-live {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Watch Now Button */
+.smi-watch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.smi-watch-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.smi-watch-btn.cyan {
+    background: linear-gradient(135deg, #00f0ff, #0096c7);
+}
+
+.smi-watch-btn.cyan:hover {
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
+}
+
+/* No matches message */
+.schedule-no-matches {
+    text-align: center;
+    padding: 40px 20px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.schedule-no-matches i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+    color: #475569;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .schedule-match-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px 14px;
+    }
+    
+    .smi-time-col {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .schedule-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .schedule-game-filter {
+        gap: 6px;
+    }
+    
+    .sgf-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+}
+
+
+/* YouTube Direct Link Button on Video Cards */
+.video-yt-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+    color: #ffffff !important;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.35);
+    width: 100%;
+}
+
+.video-yt-link-btn:hover {
+    background: linear-gradient(135deg, #ff2222, #e60000);
+    box-shadow: 0 6px 18px rgba(255, 0, 0, 0.55);
+    transform: translateY(-2px);
+    color: #ffffff !important;
+}
+
+.video-yt-link-btn i {
+    font-size: 1.15rem;
+}
+
+/* Enhanced Vào Xem Ngay Button */
+.smi-watch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.smi-watch-btn.live-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #ffffff !important;
+    box-shadow: 0 0 14px rgba(239, 68, 68, 0.45);
+    animation: watch-pulse 2s infinite;
+}
+
+.smi-watch-btn.today-btn {
+    background: linear-gradient(135deg, #00f0ff, #0077b6);
+    color: #0b0e14 !important;
+    font-weight: 800;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+}
+
+.smi-watch-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+@keyframes watch-pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.85);
+    }
+}

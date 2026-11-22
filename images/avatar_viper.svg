@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg_viper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="toxic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="50" fill="url(#bg_viper)"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#toxic)" stroke-width="3"/>
+  <!-- Dark Hood / Hair -->
+  <path d="M26 30 C30 14 70 14 74 30 C76 44 76 66 74 80 L26 80 C24 66 24 44 26 30 Z" fill="#0f172a"/>
+  <!-- Face Mask Area -->
+  <polygon points="36,44 50,38 64,44 60,72 50,78 40,72" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <!-- Toxic Gas Vents -->
+  <circle cx="44" cy="58" r="4" fill="#022c22" stroke="#4ade80" stroke-width="1.5"/>
+  <circle cx="56" cy="58" r="4" fill="#022c22" stroke="#4ade80" stroke-width="1.5"/>
+  <line x1="48" y1="58" x2="52" y2="58" stroke="#4ade80" stroke-width="2"/>
+  <!-- Glowing Toxic Eyes -->
+  <polygon points="40,46 47,47 42,49" fill="#4ade80"/>
+  <polygon points="60,46 53,47 58,49" fill="#4ade80"/>
+</svg>

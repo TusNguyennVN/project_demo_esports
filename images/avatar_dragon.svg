@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg_dragon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#450a0a"/>
+      <stop offset="100%" stop-color="#18181b"/>
+    </linearGradient>
+    <linearGradient id="gold_fire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="50" fill="url(#bg_dragon)"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#gold_fire)" stroke-width="3"/>
+  <!-- Dragon Horns -->
+  <path d="M34 38 C28 24 20 18 16 22 C22 28 30 36 34 42 Z" fill="#ef4444"/>
+  <path d="M66 38 C72 24 80 18 84 22 C78 28 70 36 66 42 Z" fill="#ef4444"/>
+  <!-- Dragon Crown -->
+  <polygon points="50,16 58,32 50,28 42,32" fill="#fbbf24"/>
+  <!-- Dragon Head -->
+  <polygon points="50,26 68,48 60,78 50,86 40,78 32,48" fill="#7f1d1d" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Dragon Eyes -->
+  <polygon points="40,48 48,50 44,54" fill="#fbbf24"/>
+  <polygon points="60,48 52,50 56,54" fill="#fbbf24"/>
+  <!-- Snout & Teeth -->
+  <polygon points="50,64 56,74 50,78 44,74" fill="#450a0a"/>
+  <polygon points="46,74 50,70 54,74" fill="#fef08a"/>
+</svg>

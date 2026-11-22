@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="cyber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="50" fill="url(#bg)"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#cyber)" stroke-width="3"/>
+  <!-- Helmet Mask -->
+  <polygon points="50,18 78,32 68,76 50,88 32,76 22,32" fill="#1e1b4b" stroke="#00f0ff" stroke-width="2"/>
+  <!-- Visor -->
+  <polygon points="50,38 72,44 64,54 50,56 36,54 28,44" fill="url(#cyber)"/>
+  <!-- Cyber accents -->
+  <line x1="50" y1="20" x2="50" y2="34" stroke="#00f0ff" stroke-width="2"/>
+  <line x1="38" y1="62" x2="44" y2="72" stroke="#00f0ff" stroke-width="2"/>
+  <line x1="62" y1="62" x2="56" y2="72" stroke="#00f0ff" stroke-width="2"/>
+  <circle cx="50" cy="74" r="3" fill="#00f0ff"/>
+</svg>

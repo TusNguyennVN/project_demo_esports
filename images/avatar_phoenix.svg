@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg_ph" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#431407"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="50" fill="url(#bg_ph)"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#fire)" stroke-width="3"/>
+  <!-- Phoenix Crest Flame -->
+  <path d="M50 12 C58 24 64 26 58 36 C52 32 50 28 50 12 Z" fill="#f97316"/>
+  <path d="M50 16 C42 24 36 26 42 36 C48 32 50 28 50 16 Z" fill="#facc15"/>
+  <!-- Phoenix Mask / Helmet -->
+  <polygon points="50,28 72,42 66,74 50,86 34,74 28,42" fill="#9a3412" stroke="#fb923c" stroke-width="2"/>
+  <!-- Sharp Wing Eye Visor -->
+  <polygon points="36,46 48,50 44,56 32,52" fill="#fef08a"/>
+  <polygon points="64,46 52,50 56,56 68,52" fill="#fef08a"/>
+  <!-- Central beak / crest -->
+  <polygon points="50,52 56,66 50,74 44,66" fill="#facc15"/>
+</svg>

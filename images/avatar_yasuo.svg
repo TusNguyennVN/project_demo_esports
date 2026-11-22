@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bg_yasuo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#042f2e"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="wind" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="50" fill="url(#bg_yasuo)"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#wind)" stroke-width="3"/>
+  <!-- Head & Hair Ponytail -->
+  <path d="M50 18 Q62 10 74 16 Q82 24 78 36 Q70 42 62 38 Z" fill="#0f172a" stroke="#14b8a6" stroke-width="1.5"/>
+  <circle cx="50" cy="46" r="20" fill="#fbcfe8"/>
+  <path d="M32 40 Q50 30 68 40 Q62 26 50 24 Q38 26 32 40 Z" fill="#1e293b"/>
+  <!-- Wind Mask & Shoulder Guard -->
+  <polygon points="34,48 50,62 66,48 50,56" fill="#0f766e" stroke="#14b8a6" stroke-width="1.5"/>
+  <!-- Eyes -->
+  <ellipse cx="44" cy="44" rx="2.5" ry="1.5" fill="#042f2e"/>
+  <ellipse cx="56" cy="44" rx="2.5" ry="1.5" fill="#042f2e"/>
+  <!-- Shoulder Armor -->
+  <path d="M22 84 L38 66 L62 66 L78 84 Z" fill="#0f766e" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="50" cy="74" r="5" fill="#2dd4bf"/>
+</svg>
